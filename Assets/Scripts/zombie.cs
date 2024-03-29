@@ -101,14 +101,14 @@ public class zombie : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                //Destroy(other.gameObject);
-                //this.animator.SetBool("moving", false);
-                //target = null;
+                Destroy(other.gameObject);
+                this.animator.SetBool("moving", false);
+                target = null;
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
-                //this.PV--;
-                transform.position = Vector3.MoveTowards(transform.position, target.position, 10 * Time.deltaTime);
+                this.PV--;
+                //transform.position = Vector3.MoveTowards(transform.position, target.position, 10 * Time.deltaTime);
             }
         }
     }

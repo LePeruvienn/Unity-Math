@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 movement;
 
-    public Animator animator;
+    private Animator animator;
 
     private void Awake()
     {
