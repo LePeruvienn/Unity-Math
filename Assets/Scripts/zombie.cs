@@ -12,11 +12,10 @@ public class zombie : MonoBehaviour
     public int PV;
     public bool isDead;
 
-    // Game object avec léquel il intéragit
     private GameHandler gameHandler;
 
-    //NavMesh (pour l'IA)
-    //NavMeshAgent agent;
+    // Vaccum
+    public float aspiForce;
 
     // Render
     public Transform target;
@@ -34,12 +33,6 @@ public class zombie : MonoBehaviour
         this.isDead = false;
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
-
-        /*
-        this.agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        */
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -69,7 +62,6 @@ public class zombie : MonoBehaviour
                 sprite.flipX = true;
             }
 
-            //agent.SetDestination(target.position);
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
 
@@ -101,14 +93,14 @@ public class zombie : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
                 this.animator.SetBool("moving", false);
                 target = null;
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
-                this.PV--;
-                //transform.position = Vector3.MoveTowards(transform.position, target.position, 10 * Time.deltaTime);
+                //this.PV--;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
             }
         }
     }

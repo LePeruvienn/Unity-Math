@@ -8,7 +8,7 @@ public class bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("bullet"))
         {
             Destroy(this.gameObject);
         }

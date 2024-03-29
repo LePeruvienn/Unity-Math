@@ -4,14 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
-public class PlayerAimWeapon : MonoBehaviour
-{
-    public event EventHandler<OnShootEventArgs> OnShoot;
-    public class OnShootEventArgs : EventArgs
-    {
-        public Vector3 gunEndPosition;
-        public Vector3 shootPosition;
-    }
+public class PlayerAimWeapon : MonoBehaviour {
 
     public Camera cam;
 
@@ -23,6 +16,16 @@ public class PlayerAimWeapon : MonoBehaviour
     private Transform gunEndPosition;
 
     private Animator WeaponAnimator;
+
+    // SHOOTING 
+
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+
+    public float bulletForce = 20f;
+
+    public float fireRate = 1f;
+    private float nextTimeToFire = 0f;
 
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class PlayerAimWeapon : MonoBehaviour
 
     private void Update()
     {
+
         HandleAiming();
         HandleShooting();
     }
@@ -51,19 +55,20 @@ public class PlayerAimWeapon : MonoBehaviour
 
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
 
+        
         if (angle < 0)
         {
             if (angle < -90)
             {
                 spriteRenderer.flipX = true;
                 weaponRenderer.flipY = true;
-                weaponTransform.localPosition = new Vector3((float)1.25, (float)-2.02, 0);
+                //weaponTransform.localPosition = new Vector3((float)1.25, (float)-2.02, 0);
             }
             else
             {
                 spriteRenderer.flipX = false;
                 weaponRenderer.flipY = false;
-                weaponTransform.localPosition = new Vector3((float)1.34, (float)1.68, 0);
+                //weaponTransform.localPosition = new Vector3((float)1.34, (float)1.68, 0);
             }
         }
         else
@@ -72,29 +77,33 @@ public class PlayerAimWeapon : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
                 weaponRenderer.flipY = true;
-                weaponTransform.localPosition = new Vector3((float)1.25, (float)-2.02, 0);
+                //weaponTransform.localPosition = new Vector3((float)1.25, (float)-2.02, 0);
             }
             else
             {
                 spriteRenderer.flipX = false;
                 weaponRenderer.flipY = false;
-                weaponTransform.localPosition = new Vector3((float)1.34, (float)1.68, 0);
+                //weaponTransform.localPosition = new Vector3((float)1.34, (float)1.68, 0);
             }
         }
+        
     }
 
     private void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Fire2") && Time.time >= nextTimeToFire)
         {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
-            WeaponAnimator.SetTrigger("Shoot");
-            OnShoot?.Invoke(this, new OnShootEventArgs
-            {
-                gunEndPosition = gunEndPosition.position,
-                shootPosition = mousePos,
-            });
+            nextTimeToFire = Time.time + 1f / fireRate;
+            Shoot();
         }
+    }
+
+    private void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 }
