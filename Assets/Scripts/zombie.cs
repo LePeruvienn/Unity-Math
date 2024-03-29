@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class zombie : MonoBehaviour
 {
     // stats
     public int PV;
+    public int Force;
     public bool isDead;
 
     // Game object avec léquel il intéragit
@@ -28,12 +31,38 @@ public class zombie : MonoBehaviour
     private Collider2D col;
     private SpriteRenderer sprite;
     private Animator animator;
+    private TextMeshPro textMeshPro;
+
 
     public void Start()
     {
         this.isDead = false;
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
+
+
+
+
+        float randomNumber = Random.Range(0, 10);
+
+        string Force = "4";// aleatoire.Next(1, 8); // Génère un entier compris entre 1 et 12
+
+        //this.textMeshPro = GameObject.FindGameObjectWithTag("Zombie").GetComponent<TextMeshProUGUI>();
+
+        this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
+
+        /*Debug.Log("textMeshPro");
+        Debug.Log("text = " + this.textMeshPro);*/
+
+        //this.textMeshPro.SetText(Force);
+
+        string String = randomNumber.ToString("R");
+
+        Debug.Log("random" + String);
+
+        this.textMeshPro.text = String;
+
+
 
         /*
         this.agent = GetComponent<NavMeshAgent>();
