@@ -18,7 +18,6 @@ public class PlayerAimWeapon : MonoBehaviour {
     private Animator WeaponAnimator;
 
     // SHOOTING 
-
     public Transform firePoint;
     public GameObject bulletPrefab;
 
@@ -27,8 +26,18 @@ public class PlayerAimWeapon : MonoBehaviour {
     public float fireRate = 1f;
     private float nextTimeToFire = 0f;
 
+    //Vaccum
+    public bool isCharged;
+    public GameObject zombieCharged;
+    public GameObject zombieHeadBulletPrefab;
+    public float zombieHeadBulletForce = 10f;
+
+
     private void Awake()
     {
+        
+        this.isCharged = false;
+
         aimTransform = transform.Find("Aim");
         weaponTransform = aimTransform.Find("weapon");
         gunEndPosition = aimTransform.Find("GunEndPosition");
@@ -37,11 +46,12 @@ public class PlayerAimWeapon : MonoBehaviour {
         weaponRenderer = aimTransform.GetComponentInChildren<SpriteRenderer>();
         WeaponAnimator = aimTransform.GetComponentInChildren<Animator>();
 
+        weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = false;
+
     }
 
     private void Update()
     {
-
         HandleAiming();
         HandleShooting();
     }
@@ -96,14 +106,46 @@ public class PlayerAimWeapon : MonoBehaviour {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         }
+        if(Input.GetButton("Fire1"))
+        {
+            ShootCharge();
+            weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = false;
+
+        }
+    }
+
+    public void setZombieCharged(GameObject zombie)
+    {
+        this.zombieCharged = zombie;
+        this.isCharged = true;
+        weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = true;
     }
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if (!this.isCharged)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void ShootCharge()
+    {
+        if (this.isCharged)
+        {
+            GameObject zombieHeadbullet = Instantiate(zombieHeadBulletPrefab, firePoint.position, firePoint.rotation);
+            zombieHeadbullet.GetComponentInChildren<ParticleSystem>().Play();
+
+
+            Rigidbody2D zombieHeadRb = zombieHeadbullet.GetComponent<Rigidbody2D>();
+
+            zombieHeadRb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            this.isCharged = false;
+            this.zombieCharged = null;
+        }
     }
 }

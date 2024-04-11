@@ -9,13 +9,15 @@ using UnityEngine.UIElements;
 public class zombie : MonoBehaviour
 {
     // stats
-    public int PV;
+    public int force;
     public bool isDead;
 
     private GameHandler gameHandler;
 
     // Vaccum
     public float aspiForce;
+    private bool isPulled;
+
 
     // Render
     public Transform target;
@@ -31,6 +33,7 @@ public class zombie : MonoBehaviour
     public void Start()
     {
         this.isDead = false;
+        this.isPulled = false;
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
@@ -65,6 +68,10 @@ public class zombie : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
 
+        /*
+        
+        VERSION AVEC ZOMBIE QUI ON DES PV
+
         if(this.PV <= 0)
         {
             if(this.isDead == false)
@@ -79,7 +86,7 @@ public class zombie : MonoBehaviour
                 Destroy(this.gameObject, 15);
             }
         }
-        
+        */
     }
 
     private void GetTarget()
@@ -93,21 +100,56 @@ public class zombie : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                //Destroy(other.gameObject);
-                this.animator.SetBool("moving", false);
-                target = null;
+                if(!this.isPulled)
+                {
+                    Destroy(other.gameObject);
+                    this.animator.SetBool("moving", false);
+                    target = null;
+                }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().setZombieCharged(this.gameObject);
+                    Destroy(this.gameObject);
+                }
+            }
+            else if (other.gameObject.CompareTag("zombieHeadBullet"))
+            {
+                kill();
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
-                //this.PV--;
                 transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
+                StartCoroutine(SetIsPulledForDuration(1f));
             }
         }
+    }
+
+    public void kill()
+    {
+        this.isDead = true;
+        col.enabled = false;
+        animator.SetBool("isDead", this.isDead);
+        Instantiate(deathParticle, transform.position, transform.rotation);
+
+        this.gameHandler.addScore(15);
+
+        Destroy(this.gameObject, 15);
+    }
+
+    IEnumerator SetIsPulledForDuration(float duration)
+    {
+        this.isPulled = true;
+        yield return new WaitForSeconds(duration);
+        this.isPulled = false;
     }
 
     public bool getIsDead()
     {
         return this.isDead;
+    }
+    public bool getIsPulled()
+    {
+        return this.isPulled;
     }
 
 }

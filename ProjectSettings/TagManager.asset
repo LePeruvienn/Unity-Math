@@ -12,6 +12,7 @@ TagManager:
   - ZombieSpawner
   - ZombieSpwanerHandler
   - Zombie
+  - zombieHeadBullet
   layers:
   - Default
   - TransparentFX
