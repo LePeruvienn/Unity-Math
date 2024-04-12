@@ -32,6 +32,8 @@ public class PlayerAimWeapon : MonoBehaviour {
     public GameObject zombieHeadBulletPrefab;
     public float zombieHeadBulletForce = 10f;
 
+    private ParticleSystem psVaccum;
+
 
     private void Awake()
     {
@@ -47,6 +49,9 @@ public class PlayerAimWeapon : MonoBehaviour {
         WeaponAnimator = aimTransform.GetComponentInChildren<Animator>();
 
         weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = false;
+
+        this.psVaccum = weaponTransform.Find("VaccumParticle").GetComponentInChildren<ParticleSystem>();
+        this.psVaccum.Stop();
 
     }
 
@@ -101,11 +106,21 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     private void HandleShooting()
     {
-        if (Input.GetButton("Fire2") && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire2") && !this.isCharged)
         {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            this.psVaccum.Play();
+            if (Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Shoot();
+            }
         }
+        else
+        {
+            this.psVaccum.Stop();
+        }
+
+
         if(Input.GetButton("Fire1"))
         {
             ShootCharge();
@@ -130,6 +145,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            Destroy(bullet,0.2f);
         }
     }
 
@@ -138,7 +154,6 @@ public class PlayerAimWeapon : MonoBehaviour {
         if (this.isCharged)
         {
             GameObject zombieHeadbullet = Instantiate(zombieHeadBulletPrefab, firePoint.position, firePoint.rotation);
-            zombieHeadbullet.GetComponentInChildren<ParticleSystem>().Play();
 
 
             Rigidbody2D zombieHeadRb = zombieHeadbullet.GetComponent<Rigidbody2D>();

@@ -10,6 +10,7 @@ public class zombie : MonoBehaviour
 {
     // stats
     public int force;
+    public int damage;
     public bool isDead;
 
     private GameHandler gameHandler;
@@ -30,8 +31,14 @@ public class zombie : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
 
+    //Player
+    private PlayerStats playerStats;
+
     public void Start()
     {
+        
+        GetTarget();
+
         this.isDead = false;
         this.isPulled = false;
 
@@ -41,6 +48,9 @@ public class zombie : MonoBehaviour
         col = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
     }
 
     public void Update()
@@ -102,9 +112,7 @@ public class zombie : MonoBehaviour
             {
                 if(!this.isPulled)
                 {
-                    Destroy(other.gameObject);
-                    this.animator.SetBool("moving", false);
-                    target = null;
+                    StartCoroutine(applyDamage());
                 }
                 else
                 {
@@ -141,6 +149,15 @@ public class zombie : MonoBehaviour
         this.isPulled = true;
         yield return new WaitForSeconds(duration);
         this.isPulled = false;
+    }
+
+    IEnumerator applyDamage()
+    {
+        while(col.IsTouching(target.GetComponent<Collider2D>()))
+        {
+            playerStats.takeDamage(10);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public bool getIsDead()

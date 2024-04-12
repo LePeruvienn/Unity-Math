@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float moveSpeed;
+    //Players Stats
+    private PlayerStats playerStats;
 
     public bool isMoving;
 
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        playerStats = GetComponent<PlayerStats>();
         animator = GetComponent<Animator>();
     }
 
@@ -41,6 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * playerStats.speed * Time.fixedDeltaTime);
     }
 }

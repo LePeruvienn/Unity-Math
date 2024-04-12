@@ -32,6 +32,10 @@ public class ZombieSpwanerHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        this.gameHandler.addManche();
+
+        yield return new WaitForSeconds(5f);
+
         Debug.Log("Début de la Manche ...");
 
         float timeToWait;
@@ -62,7 +66,6 @@ public class ZombieSpwanerHandler : MonoBehaviour
 
         Debug.Log("Tout les zombie sont mort ! Début de la prochaine manche");
 
-        this.gameHandler.addManche();
         StartCoroutine("StartManche");
     }
 
