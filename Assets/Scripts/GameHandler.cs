@@ -14,15 +14,16 @@ public class GameHandler : MonoBehaviour
     // Game Objects
     public List<GameObject> listeZombieSpawner;
 
+    //Stats
     private Stats stats;
 
     private void Start()
     {
         this.score = 0;
-        this.numManche = 1;
+        this.numManche = 0;
         this.zombieEnVie = 0;
         
-        this.stats = GameObject.FindGameObjectWithTag("Score").GetComponent<Stats>();
+        this.stats = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Stats>();
     }
 
 
@@ -36,6 +37,7 @@ public class GameHandler : MonoBehaviour
     public void addManche()
     {
         this.numManche++;
+        stats.playNewManche();
     }
 
     //Getters

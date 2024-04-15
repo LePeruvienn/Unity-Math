@@ -11,15 +11,21 @@ using TMPro;
 public class zombie : MonoBehaviour
 {
     // stats
+<<<<<<< HEAD
     public int PV;
     public int Force;
+=======
+    public int force;
+    public int damage;
+>>>>>>> origin/devVaccum
     public bool isDead;
 
-    // Game object avec léquel il intéragit
     private GameHandler gameHandler;
 
-    //NavMesh (pour l'IA)
-    //NavMeshAgent agent;
+    // Vaccum
+    public float aspiForce;
+    private bool isPulled;
+
 
     // Render
     public Transform target;
@@ -34,12 +40,20 @@ public class zombie : MonoBehaviour
     private TextMeshPro textMeshPro;
 
 
+    //Player
+    private PlayerStats playerStats;
+
     public void Start()
     {
+        
+        GetTarget();
+
         this.isDead = false;
+        this.isPulled = false;
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
+<<<<<<< HEAD
 
 
 
@@ -70,10 +84,15 @@ public class zombie : MonoBehaviour
         agent.updateUpAxis = false;
         */
 
+=======
+>>>>>>> origin/devVaccum
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
     }
 
     public void Update()
@@ -98,9 +117,12 @@ public class zombie : MonoBehaviour
                 sprite.flipX = true;
             }
 
-            //agent.SetDestination(target.position);
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
+
+        /*
+        
+        VERSION AVEC ZOMBIE QUI ON DES PV
 
         if(this.PV <= 0)
         {
@@ -116,7 +138,7 @@ public class zombie : MonoBehaviour
                 Destroy(this.gameObject, 15);
             }
         }
-        
+        */
     }
 
     private void GetTarget()
@@ -130,20 +152,63 @@ public class zombie : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                Destroy(other.gameObject);
-                this.animator.SetBool("moving", false);
-                target = null;
+                if(!this.isPulled)
+                {
+                    StartCoroutine(applyDamage());
+                }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().setZombieCharged(this.gameObject);
+                    Destroy(this.gameObject);
+                }
+            }
+            else if (other.gameObject.CompareTag("zombieHeadBullet"))
+            {
+                kill();
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
-                this.PV--;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
+                StartCoroutine(SetIsPulledForDuration(1f));
             }
+        }
+    }
+
+    public void kill()
+    {
+        this.isDead = true;
+        col.enabled = false;
+        animator.SetBool("isDead", this.isDead);
+        Instantiate(deathParticle, transform.position, transform.rotation);
+
+        this.gameHandler.addScore(15);
+
+        Destroy(this.gameObject, 15);
+    }
+
+    IEnumerator SetIsPulledForDuration(float duration)
+    {
+        this.isPulled = true;
+        yield return new WaitForSeconds(duration);
+        this.isPulled = false;
+    }
+
+    IEnumerator applyDamage()
+    {
+        while(col.IsTouching(target.GetComponent<Collider2D>()))
+        {
+            playerStats.takeDamage(10);
+            yield return new WaitForSeconds(1f);
         }
     }
 
     public bool getIsDead()
     {
         return this.isDead;
+    }
+    public bool getIsPulled()
+    {
+        return this.isPulled;
     }
 
 }

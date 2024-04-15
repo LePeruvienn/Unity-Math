@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class bullet : MonoBehaviour
+public class zombieHeadBullet : MonoBehaviour
 {
-
     void OnCollisionEnter2D(Collision2D other)
     {
         if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("bullet"))
