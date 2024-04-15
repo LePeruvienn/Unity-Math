@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -128,15 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d598e79c27e084aad3dd513048104a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   PV: 5
-  Force: 0
-=======
-  force: 0
-  damage: 20
->>>>>>> origin/devVaccum
   isDead: 0
-  aspiForce: 15
   target: {fileID: 0}
   speed: 3
   deathParticle: {fileID: 3250102135155502708, guid: a2dfa73ac7d45da458376a3156758548, type: 3}
@@ -230,7 +223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.03, y: -1.59}
+  m_AnchoredPosition: {x: 2.611, y: -3.12}
   m_SizeDelta: {x: 5.222, y: 11.832}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1494299921505168705
@@ -304,8 +297,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278198783
-  m_fontColor: {r: 1, g: 0.13039553, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -328,7 +321,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
