@@ -11,13 +11,9 @@ using TMPro;
 public class zombie : MonoBehaviour
 {
     // stats
-<<<<<<< HEAD
     public int PV;
-    public int Force;
-=======
     public int force;
     public int damage;
->>>>>>> origin/devVaccum
     public bool isDead;
 
     private GameHandler gameHandler;
@@ -53,39 +49,14 @@ public class zombie : MonoBehaviour
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
-<<<<<<< HEAD
-
-
-
         float randomNumber = Random.Range(0, 10);
-
-        string Force = "4";// aleatoire.Next(1, 8); // Génère un entier compris entre 1 et 12
-
-        //this.textMeshPro = GameObject.FindGameObjectWithTag("Zombie").GetComponent<TextMeshProUGUI>();
+        string String = randomNumber.ToString("R");
+        //force = randomNumber;
 
         this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
-
-        /*Debug.Log("textMeshPro");
-        Debug.Log("text = " + this.textMeshPro);*/
-
-        //this.textMeshPro.SetText(Force);
-
-        string String = randomNumber.ToString("R");
-
         Debug.Log("random" + String);
-
         this.textMeshPro.text = String;
 
-
-
-        /*
-        this.agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        */
-
-=======
->>>>>>> origin/devVaccum
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
