@@ -9,8 +9,13 @@ public class PlayerStats : MonoBehaviour
     // Stats
     public int health;
     public int maxHealth;
+    public int healthRegen;
 
     public float speed;
+
+    public int pullPower;
+    public int pullBattery;
+    public int pullBatteryReloadSpeed;
 
     public bool canDash;
 
