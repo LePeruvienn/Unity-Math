@@ -12,6 +12,8 @@ public class ZombieSpwanerHandler : MonoBehaviour
 
     public GameObject objectToSpawn;
 
+    public GameObject bonusMenu;
+
     private GameHandler gameHandler;
     private List<Transform> listeSpwaner;
 
@@ -64,7 +66,13 @@ public class ZombieSpwanerHandler : MonoBehaviour
 
         yield return new WaitUntil(() => allZombieKilled());
 
-        Debug.Log("Tout les zombie sont mort ! Début de la prochaine manche");
+
+        Debug.Log("Tout les zombie sont mort !");
+
+        this.bonusMenu.SetActive(true);
+
+
+        Debug.Log("Début de la prochaine manche");
 
         StartCoroutine("StartManche");
     }

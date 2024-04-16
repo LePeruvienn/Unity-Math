@@ -9,12 +9,15 @@ using TMPro;
 public class BonusMenuHandler : MonoBehaviour
 {
 
-    public Sprite sprite;
-
+    private PlayerStats playerStats;
+    
     private List<Bonus> listeBonus;
 
     private GameObject card1;
     private GameObject card2;
+
+    private GameObject border1;
+    private GameObject border2;
 
     private Bonus bonus1;
     private Bonus bonus2;
@@ -23,10 +26,15 @@ public class BonusMenuHandler : MonoBehaviour
     void Start()
     {
         
+        this.playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
         // On récupère nos 2 game Object Card
 
         this.card1 = this.transform.Find("Card1").gameObject;
         this.card2 = this.transform.Find("Card2").gameObject;
+
+        this.border1 = this.card1.transform.Find("border").gameObject;
+        this.border2 = this.card2.transform.Find("border").gameObject;
 
 
         // ON MET EN PLACE LA LISTE DES BONUS :
@@ -40,6 +48,14 @@ public class BonusMenuHandler : MonoBehaviour
         listeBonus.Add(new BonusPowerBattery(10));
         listeBonus.Add(new BonusPowerReloadSpeed(10));
 
+        RandomBonus();
+
+    }
+
+    // Get random Bonus
+
+    public void RandomBonus()
+    {
         int randomIndex;
         System.Random rand = new System.Random();
 
@@ -69,6 +85,8 @@ public class BonusMenuHandler : MonoBehaviour
         Sprite Sprite1 = Resources.Load<Sprite>(bonus1.getImagePath());
         Image1.GetComponent<Image>().sprite = Sprite1;
 
+        this.border2.SetActive(false);
+
 
         // Card 2
 
@@ -82,6 +100,46 @@ public class BonusMenuHandler : MonoBehaviour
         Sprite Sprite2 = Resources.Load<Sprite>(bonus2.getImagePath());
         Image2.GetComponent<Image>().sprite = Sprite2;
 
+        this.border2.SetActive(false);
+    }
+
+    // UI function
+
+        // 1
+    public void PointerEnterCard1()
+    {
+        this.border1.SetActive(true);
+    }
+    public void PointerExitCard1()
+    {
+        this.border1.SetActive(false);
+    }
+
+        // 2
+    public void PointerEnterCard2()
+    {
+        this.border2.SetActive(true);
+    }
+    public void PointerExitCard2()
+    {
+        this.border2.SetActive(false);
+    }
+
+
+    // Apply function
+    public void ApplyBonus1()
+    {
+        this.bonus1.apply(this.playerStats);
+        this.gameObject.SetActive(false);
+        RandomBonus();
+
+    }
+
+    public void ApplyBonus2()
+    {
+        this.bonus2.apply(this.playerStats);
+        this.gameObject.SetActive(false);
+        RandomBonus();
     }
 }
 
