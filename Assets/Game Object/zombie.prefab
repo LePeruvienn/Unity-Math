@@ -107,7 +107,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -128,8 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d598e79c27e084aad3dd513048104a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PV: 5
+  force: 0
+  damage: 20
   isDead: 0
+  aspiForce: 15
   target: {fileID: 0}
   speed: 3
   deathParticle: {fileID: 3250102135155502708, guid: a2dfa73ac7d45da458376a3156758548, type: 3}
