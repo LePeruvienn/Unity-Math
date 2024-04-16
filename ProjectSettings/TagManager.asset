@@ -13,6 +13,7 @@ TagManager:
   - ZombieSpwanerHandler
   - Zombie
   - zombieHeadBullet
+  - bonusMenuHandler
   layers:
   - Default
   - TransparentFX
