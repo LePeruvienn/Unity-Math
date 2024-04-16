@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -17,14 +18,30 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
 
+    //DASH
+    public float dashSpeed;
+    public float dashDuration;
+    public float dashCooldown;
+
+    private bool isDashing;
+    private bool canDash;
+
     private void Awake()
     {
-        playerStats = GetComponent<PlayerStats>();
-        animator = GetComponent<Animator>();
+        this.playerStats = GetComponent<PlayerStats>();
+        this.animator = GetComponent<Animator>();
+        this.isDashing = false;
+        this.canDash = true;
     }
 
     void Update()
     {
+
+        if (this.isDashing)
+        {
+            return;
+        }
+        
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -39,10 +56,34 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isMoving", isMoving);
 
+        if(Input.GetKeyDown(KeyCode.Space) && this.canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * playerStats.speed * Time.fixedDeltaTime);
+        if (this.isDashing)
+        {
+            return;
+        }
+
+        rb.velocity = new Vector2(movement.x * playerStats.speed, movement.y * playerStats.speed);
+        //rb.MovePosition(rb.position + movement * playerStats.speed * Time.fixedDeltaTime);
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+
     }
 }

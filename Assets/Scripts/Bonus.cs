@@ -58,7 +58,7 @@ namespace bonus
 
         public override void apply(PlayerStats player)
         {
-            player.speed += healthamount;
+            player.maxHealth += healthamount;
         }
     }
 
@@ -78,7 +78,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPower(int amount) : base("Power", "Give you more pull power to youre vaccum", "Bonus/power")
+        public BonusPower(int amount) : base("Power", "Give you more pull power to youre vaccum", "Bonus/energetic")
         {
             this.amount = amount;
         }
@@ -94,7 +94,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPowerBattery(int amount) : base("Battery", "Give you more Battery to your vaccum", "Bonus/batterypower")
+        public BonusPowerBattery(int amount) : base("Battery", "Give you more Battery to your vaccum", "Bonus/battery")
         {
             this.amount = amount;
         }
@@ -110,7 +110,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPowerReloadSpeed(int amount) : base("Battery", "Make your vaccum reload faster", "Bonus/powerBatteryReloadSpeed")
+        public BonusPowerReloadSpeed(int amount) : base("Battery", "Make your vaccum reload faster", "Bonus/battery")
         {
             this.amount = amount;
         }
