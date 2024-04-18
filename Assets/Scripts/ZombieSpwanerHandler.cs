@@ -32,11 +32,11 @@ public class ZombieSpwanerHandler : MonoBehaviour
 
     IEnumerator StartManche()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         this.gameHandler.addManche();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         Debug.Log("Début de la Manche ...");
 

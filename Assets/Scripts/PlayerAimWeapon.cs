@@ -8,6 +8,8 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     public Camera cam;
 
+    private PlayerStats playerStats;
+
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer weaponRenderer;
 
@@ -39,6 +41,8 @@ public class PlayerAimWeapon : MonoBehaviour {
     {
         
         this.isCharged = false;
+
+        playerStats = GetComponent<PlayerStats>();
 
         aimTransform = transform.Find("Aim");
         weaponTransform = aimTransform.Find("weapon");
@@ -106,18 +110,24 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     private void HandleShooting()
     {
-        if (Input.GetButton("Fire2") && !this.isCharged)
+        if (Input.GetButton("Fire2") && !this.isCharged && playerStats.getCanVaccum())
         {
             this.psVaccum.Play();
             if (Time.time >= nextTimeToFire)
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
+                playerStats.usePower(2);
             }
         }
         else
         {
             this.psVaccum.Stop();
+            if (Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + 1f / fireRate;
+                playerStats.addPower(1);
+            }
         }
 
 
