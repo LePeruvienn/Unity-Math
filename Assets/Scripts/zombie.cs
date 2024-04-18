@@ -15,6 +15,10 @@ public class zombie : MonoBehaviour
 
     private GameHandler gameHandler;
 
+    //Damages rate
+    public float damageRate = 1f;
+    private float nextTimeToDamage = 0f;
+
     // Vaccum
     public float aspiForce;
     private bool isPulled;
@@ -93,19 +97,7 @@ public class zombie : MonoBehaviour
     {
         if (this.isDead == false)
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                if(!this.isPulled)
-                {
-                    StartCoroutine(applyDamage());
-                }
-                else
-                {
-                    playerAimWeapon.setZombieCharged(this.gameObject);
-                    Destroy(this.gameObject);
-                }
-            }
-            else if (other.gameObject.CompareTag("zombieHeadBullet"))
+            if (other.gameObject.CompareTag("zombieHeadBullet"))
             {
                 kill();
             }
@@ -113,6 +105,29 @@ public class zombie : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
                 StartCoroutine(SetIsPulledForDuration(1f));
+            }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (this.isDead == false) {
+
+            if (other.gameObject.CompareTag("Player"))
+            {
+                if (!this.isPulled)
+                {
+                    if (Time.time >= nextTimeToDamage)
+                    {
+                        nextTimeToDamage = Time.time + 1f / damageRate;
+                        playerStats.takeDamage(10);
+                    }
+                }
+                else
+                {
+                    playerAimWeapon.setZombieCharged(this.gameObject);
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

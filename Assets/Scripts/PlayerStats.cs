@@ -23,15 +23,37 @@ public class PlayerStats : MonoBehaviour
 
     // Objects
     public Image healthbar;
+    public Image healthBorder;
+    public Image healthBack;
+
     public Transform firePoint;
     public Image powerbar;
+    public Image powerBorder;
+    public Image powerBack;
+
+    // Calculable
+    private float maxfillbar;
+    public int maxfillbarHP = 1000;
+
+    private float maxfillPowerbar;
+    public int maxFillbarPower = 700;
 
     void Start()
     {
         canVaccum = true;
-        
-        healthbar.fillAmount = (float) health / maxHealth;
-        powerbar.fillAmount = (float) powerLevel / pullBattery;
+
+        maxfillbar = (float) maxHealth/maxfillbarHP;
+
+        healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
+
+        healthBorder.fillAmount = maxfillbar + 0.01f;
+        healthBack.fillAmount = maxfillbar;
+
+        maxfillPowerbar = (float) pullBattery / maxFillbarPower;
+
+        powerbar.fillAmount = ((float)powerLevel / pullBattery) * maxfillPowerbar;
+        powerBorder.fillAmount = maxfillPowerbar + 0.01f;
+        powerBack.fillAmount = maxfillPowerbar + 0.01f;
     }
      
 
@@ -48,7 +70,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            healthbar.fillAmount = (float) health / maxHealth;
+            healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
         }
     }
 
@@ -63,7 +85,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            healthbar.fillAmount = (float) health / maxHealth;
+            healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
         }
     }
     //
@@ -82,7 +104,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            powerbar.fillAmount = (float) powerLevel / pullBattery;
+            powerbar.fillAmount = ((float) powerLevel / pullBattery) * maxfillPowerbar;
         }
     }
 
@@ -93,11 +115,11 @@ public class PlayerStats : MonoBehaviour
         if (this.powerLevel > pullBattery)
         {
             this.powerLevel = pullBattery;
-            powerbar.fillAmount = 100f;
+            powerbar.fillAmount = maxfillPowerbar;
         }
         else
         {
-            powerbar.fillAmount = (float) powerLevel / pullBattery;
+            powerbar.fillAmount = ((float) powerLevel / pullBattery) * maxfillPowerbar;
         }
     }
 
@@ -111,7 +133,7 @@ public class PlayerStats : MonoBehaviour
     public void setFullHealth()
     {
         this.health = this.maxHealth;
-        healthbar.fillAmount = 1;
+        healthbar.fillAmount = maxfillbar;
     }
 
     public int getHealth()
@@ -122,6 +144,17 @@ public class PlayerStats : MonoBehaviour
     public int getMaxHealth()
     {
         return maxHealth;
+    }
+
+    public void addMaxHealth(int amount)
+    {
+        this.maxHealth += amount;
+
+        maxfillbar = (float)maxHealth / maxfillbarHP;
+        healthbar.fillAmount = ((float)health / maxHealth) * maxfillbar;
+
+        healthBorder.fillAmount = maxfillbar + 0.01f;
+        healthBack.fillAmount = maxfillbar;
     }
 
     public float getSpeed()

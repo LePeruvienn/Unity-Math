@@ -58,7 +58,7 @@ namespace bonus
 
         public override void apply(PlayerStats player)
         {
-            player.maxHealth += healthamount;
+            player.addMaxHealth(healthamount);
         }
     }
 
