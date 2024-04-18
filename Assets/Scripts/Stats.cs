@@ -9,16 +9,31 @@ public class Stats : MonoBehaviour
 
     private GameHandler gameHandler;
 
+    private PlayerStats playerStats;
+
     private TextMeshProUGUI txtScore;
     private TextMeshProUGUI txtManche;
+    private TextMeshProUGUI txtHP;
+    private TextMeshProUGUI txtBattery;
+    private TextMeshProUGUI txtRelaodSpeed;
 
     public GameObject newManche;
 
     void Start()
     {
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
+
+        this.playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
         this.txtScore = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMeshProUGUI>();
         this.txtManche = GameObject.FindGameObjectWithTag("Manche").GetComponent<TextMeshProUGUI>();
+
+        Transform playerInfo = this.transform.Find("PlayerInfo");
+
+        this.txtHP = playerInfo.Find("HP").gameObject.GetComponent<TextMeshProUGUI>();
+        this.txtBattery = playerInfo.Find("Battery").gameObject.GetComponent<TextMeshProUGUI>();
+        this.txtRelaodSpeed = playerInfo.Find("ReloadSpeed").gameObject.GetComponent<TextMeshProUGUI>();
+
         newManche.SetActive(false);
     }
 
@@ -26,11 +41,17 @@ public class Stats : MonoBehaviour
     {
         txtScore.text = "Score : " + gameHandler.getScore();
         txtManche.text = "Manche : " + gameHandler.getNumManche();
+
+        this.txtHP.text = "HP : " + playerStats.getHealth() +  "/" + playerStats.getMaxHealth();
+        this.txtBattery.text = "Battery : " + playerStats.getBattery();
+        this.txtRelaodSpeed.text = "Reload Speed : " + playerStats.getReloadSpeed();
+
     }
 
     public void playNewManche()
     {
         StartCoroutine(animNewManche());
+        this.playerStats.setFullHealth();
     }
 
     IEnumerator animNewManche()

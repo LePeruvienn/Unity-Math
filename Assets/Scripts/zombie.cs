@@ -34,6 +34,10 @@ public class zombie : MonoBehaviour
     //Player
     private PlayerStats playerStats;
 
+    //Player aim
+
+    private PlayerAimWeapon playerAimWeapon;
+
     public void Start()
     {
         
@@ -50,6 +54,7 @@ public class zombie : MonoBehaviour
         animator = GetComponent<Animator>();
 
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
 
     }
 
@@ -116,7 +121,7 @@ public class zombie : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().setZombieCharged(this.gameObject);
+                    playerAimWeapon.setZombieCharged(this.gameObject);
                     Destroy(this.gameObject);
                 }
             }
