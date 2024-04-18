@@ -40,7 +40,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.34, y: 2.82}
+  m_AnchoredPosition: {x: 2.34, y: 2.92}
   m_SizeDelta: {x: 20.48, y: 20.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4461563994784188407
@@ -132,7 +132,7 @@ MonoBehaviour:
   force: 0
   damage: 0
   isDead: 0
-  aspiForce: 0
+  aspiForce: 10
   target: {fileID: 0}
   speed: 3
   deathParticle: {fileID: 3250102135155502708, guid: a2dfa73ac7d45da458376a3156758548, type: 3}
@@ -226,7 +226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.611, y: -3.12}
+  m_AnchoredPosition: {x: 2.04, y: -0.9}
   m_SizeDelta: {x: 5.222, y: 11.832}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1494299921505168705
@@ -300,8 +300,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 2231369727
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5176471}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535

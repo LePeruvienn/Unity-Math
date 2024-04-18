@@ -12,7 +12,7 @@ public class zombie : MonoBehaviour
 {
     // stats
     public int PV;
-    public int force;
+    public float force;
     public int damage;
     public bool isDead;
 
@@ -39,6 +39,9 @@ public class zombie : MonoBehaviour
     //Player
     private PlayerStats playerStats;
 
+    //Player aim
+    private PlayerAimWeapon playerAimWeapon;
+
     public void Start()
     {
         
@@ -49,13 +52,18 @@ public class zombie : MonoBehaviour
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
-        float randomNumber = Random.Range(0, 10);
+        float randomNumber = Random.Range(1, 10);
+        force = randomNumber * 2;
         string String = randomNumber.ToString("R");
-        //force = randomNumber;
 
         this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
-        Debug.Log("random" + String);
+        Debug.Log("random = " + String);
         this.textMeshPro.text = String;
+
+        float realforce = force * 0.1f;
+        this.transform.localScale = new Vector2(realforce, realforce);
+
+
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -63,7 +71,7 @@ public class zombie : MonoBehaviour
         animator = GetComponent<Animator>();
 
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-
+        playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
     }
 
     public void Update()
@@ -90,26 +98,6 @@ public class zombie : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
-
-        /*
-        
-        VERSION AVEC ZOMBIE QUI ON DES PV
-
-        if(this.PV <= 0)
-        {
-            if(this.isDead == false)
-            {
-                this.isDead = true;
-                col.enabled = false;
-                animator.SetBool("isDead", this.isDead);
-                Instantiate(deathParticle,transform.position,transform.rotation);
-
-                this.gameHandler.addScore(15);
-
-                Destroy(this.gameObject, 15);
-            }
-        }
-        */
     }
 
     private void GetTarget()
@@ -119,6 +107,7 @@ public class zombie : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("OnCollisionEnter2D");
         if (this.isDead == false)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -129,16 +118,20 @@ public class zombie : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().setZombieCharged(this.gameObject);
+                    playerAimWeapon.setZombieCharged(this.gameObject);
                     Destroy(this.gameObject);
                 }
             }
             else if (other.gameObject.CompareTag("zombieHeadBullet"))
             {
-                kill();
+                //add number
+                Instantiate(playerAimWeapon.get)
+                //kill();
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
+
+                Debug.Log("bullet");
                 transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
                 StartCoroutine(SetIsPulledForDuration(1f));
             }
