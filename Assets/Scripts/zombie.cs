@@ -52,18 +52,10 @@ public class zombie : MonoBehaviour
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
-        float randomNumber = Random.Range(1, 10);
-        force = randomNumber * 2;
-        string String = randomNumber.ToString("R");
+        
+        force = Random.Range(1, 10);
 
-        this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
-        Debug.Log("random = " + String);
-        this.textMeshPro.text = String;
-
-        float realforce = force * 0.1f;
-        this.transform.localScale = new Vector2(realforce, realforce);
-
-
+        UpdateScale(force);
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -72,6 +64,20 @@ public class zombie : MonoBehaviour
 
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
+    }
+
+    public void UpdateScale(float force)
+    {
+        this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
+        string Stringforce = force.ToString("R");
+        Debug.Log("random = " + Stringforce);
+        this.textMeshPro.text = Stringforce;
+        this.force = force;
+        float scaleforce = force * 0.1f;
+        float scaleSpeed = force * 0.8f;
+        //this.speed = scaleSpeed;
+        //this.transform.localScale = new Vector2(scaleforce, scaleforce);
+        //this.transform.localScale = new Vector2(this.transform.localScale.x * (1f + 0.1f * force), this.transform.localScale.y * (1f + 0.1f * force));
     }
 
     public void Update()
@@ -96,7 +102,7 @@ public class zombie : MonoBehaviour
                 sprite.flipX = true;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
     }
 
@@ -118,14 +124,18 @@ public class zombie : MonoBehaviour
                 }
                 else
                 {
-                    playerAimWeapon.setZombieCharged(this.gameObject);
+                    playerAimWeapon.setZombieCharged(force);
                     Destroy(this.gameObject);
                 }
             }
             else if (other.gameObject.CompareTag("zombieHeadBullet"))
             {
                 //add number
-                Instantiate(playerAimWeapon.get)
+                float newForce1 = this.force;
+                float newForce2 = playerAimWeapon.getZombieCharged();
+                float newForce = newForce1 + newForce2;
+
+                UpdateScale(newForce);
                 //kill();
             }
             else if (other.gameObject.CompareTag("bullet"))
