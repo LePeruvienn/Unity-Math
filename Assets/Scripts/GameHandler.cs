@@ -11,9 +11,6 @@ public class GameHandler : MonoBehaviour
     private int numManche;
     private int zombieEnVie;
 
-    // Game Objects
-    public List<GameObject> listeZombieSpawner;
-
     //Stats
     private Stats stats;
 

@@ -58,4 +58,40 @@ public class PlayerStats : MonoBehaviour
             healthbar.fillAmount = (float) health / maxHealth;
         }
     }
+
+    public void setFullHealth()
+    {
+        this.health = this.maxHealth;
+        healthbar.fillAmount = 1;
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
+    public int getPullPower()
+    {
+        return pullPower;
+    }
+
+    public int getBattery()
+    {
+        return pullBattery;
+    }
+
+    public int getReloadSpeed()
+    {
+        return pullBatteryReloadSpeed;
+    }
 }

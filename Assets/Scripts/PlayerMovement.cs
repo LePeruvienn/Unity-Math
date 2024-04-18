@@ -11,8 +11,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isMoving;
 
+    //Game Compnent
     public Rigidbody2D rb;
     public Camera cam;
+    private TrailRenderer trailRenderer;
 
     private Vector2 movement;
 
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this.playerStats = GetComponent<PlayerStats>();
         this.animator = GetComponent<Animator>();
+        this.trailRenderer = transform.Find("Trail").gameObject.GetComponent<TrailRenderer>();
         this.isDashing = false;
         this.canDash = true;
     }
@@ -76,11 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        this.trailRenderer.emitting = true;
         canDash = false;
         isDashing = true;
         rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        this.trailRenderer.emitting = false;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
