@@ -82,26 +82,6 @@ public class zombie : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
-
-        /*
-        
-        VERSION AVEC ZOMBIE QUI ON DES PV
-
-        if(this.PV <= 0)
-        {
-            if(this.isDead == false)
-            {
-                this.isDead = true;
-                col.enabled = false;
-                animator.SetBool("isDead", this.isDead);
-                Instantiate(deathParticle,transform.position,transform.rotation);
-
-                this.gameHandler.addScore(15);
-
-                Destroy(this.gameObject, 15);
-            }
-        }
-        */
     }
 
     private void GetTarget()
