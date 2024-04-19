@@ -31,7 +31,7 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     //Vaccum
     public bool isCharged;
-    public GameObject zombieCharged;
+    public float zombieCharged;
     public GameObject zombieHeadBulletPrefab;
     public float zombieHeadBulletForce = 10f;
 
@@ -177,13 +177,6 @@ public class PlayerAimWeapon : MonoBehaviour {
         }
     }
 
-    public void setZombieCharged(GameObject zombie)
-    {
-        this.zombieCharged = zombie;
-        this.isCharged = true;
-        weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = true;
-    }
-
     private void Shoot()
     {
         if (!this.isCharged)
@@ -193,7 +186,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-            Destroy(bullet,0.2f);
+            Destroy(bullet, 0.2f);
         }
     }
 
@@ -208,7 +201,6 @@ public class PlayerAimWeapon : MonoBehaviour {
 
             zombieHeadRb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
             this.isCharged = false;
-            this.zombieCharged = null;
         }
     }
 
@@ -221,4 +213,17 @@ public class PlayerAimWeapon : MonoBehaviour {
     {
         return this.modeList[indexMode];
     }
+
+    public void setZombieCharged(float zombie)
+    {
+        this.zombieCharged = zombie;
+        this.isCharged = true;
+        weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = true;
+    }
+
+    public float getZombieCharged()
+    {
+        return this.zombieCharged;
+    }
+
 }

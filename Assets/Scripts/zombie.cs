@@ -1,15 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class zombie : MonoBehaviour
 {
     // stats
-    public int force;
+    public float force;
     public int damage;
     public bool isDead;
 
@@ -34,6 +36,7 @@ public class zombie : MonoBehaviour
     private Collider2D col;
     private SpriteRenderer sprite;
     private Animator animator;
+    private TextMeshPro textMeshPro;
 
     //Player
     private PlayerStats playerStats;
@@ -51,6 +54,18 @@ public class zombie : MonoBehaviour
         this.isPulled = false;
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
+
+
+        float newforce;
+        if (force == 0f)
+        {
+            newforce = Random.Range(1, 10);
+        }
+        else
+        {
+            newforce = force;
+        }
+        UpdateScale(newforce);
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -84,8 +99,22 @@ public class zombie : MonoBehaviour
                 sprite.flipX = true;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
+    }
+
+    public void UpdateScale(float newforce)
+    {
+        this.force = newforce;
+        this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
+        string Stringforce = force.ToString("R");
+        Debug.Log("random = " + Stringforce);
+        this.textMeshPro.text = Stringforce;
+        float scaleforce = force * 0.1f;
+        float scaleSpeed = force * 0.8f;
+        //this.speed = scaleSpeed;
+        //this.transform.localScale = new Vector2(scaleforce, scaleforce);
+        //this.transform.localScale = new Vector2(this.transform.localScale.x * (1f + 0.1f * force), this.transform.localScale.y * (1f + 0.1f * force));
     }
 
     private void GetTarget()
@@ -95,14 +124,35 @@ public class zombie : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("OnCollisionEnter2D");
         if (this.isDead == false)
         {
-            if (other.gameObject.CompareTag("zombieHeadBullet"))
+            if (other.gameObject.CompareTag("Player"))
             {
-                kill();
+                if (!this.isPulled)
+                {
+                    StartCoroutine(applyDamage());
+                }
+                else
+                {
+                    playerAimWeapon.setZombieCharged(force);
+                    Destroy(this.gameObject);
+                }
+            }
+            else if (other.gameObject.CompareTag("zombieHeadBullet"))
+            {
+                //add number
+                float newForce1 = this.force;
+                float newForce2 = playerAimWeapon.getZombieCharged();
+                float newForce = newForce1 + newForce2;
+
+                UpdateScale(newForce);
+                //kill();
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
+
+                Debug.Log("bullet");
                 transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
                 StartCoroutine(SetIsPulledForDuration(1f));
             }
@@ -125,7 +175,7 @@ public class zombie : MonoBehaviour
                 }
                 else
                 {
-                    playerAimWeapon.setZombieCharged(this.gameObject);
+                    playerAimWeapon.setZombieCharged(force);
                     Destroy(this.gameObject);
                 }
             }
