@@ -79,16 +79,19 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        this.trailRenderer.emitting = true;
-        canDash = false;
-        isDashing = true;
-        rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
-        yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
-        this.trailRenderer.emitting = false;
+        if (this.playerStats.getCanDash())
+        {
+            this.trailRenderer.emitting = true;
+            canDash = false;
+            isDashing = true;
+            rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+            yield return new WaitForSeconds(dashDuration);
+            isDashing = false;
+            this.trailRenderer.emitting = false;
 
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+        }
 
     }
 }

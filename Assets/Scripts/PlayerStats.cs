@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class PlayerStats : MonoBehaviour
 
     public Transform modeOrigin;
     private List<Transform> modesTransform = new List<Transform>();
+    public TextMeshProUGUI txtMode;
 
     // Calculable
 
@@ -57,7 +60,6 @@ public class PlayerStats : MonoBehaviour
         maxfillbar = (float) maxHealth/maxfillbarHP;
 
         healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
-
         healthBorder.fillAmount = maxfillbar + 0.01f;
         healthBack.fillAmount = maxfillbar;
 
@@ -70,7 +72,6 @@ public class PlayerStats : MonoBehaviour
         // MODES
         getAllModesTransform();
         this.baseScale = modesTransform[0].localScale;
-        setUpModes();
     }
      
 
@@ -98,17 +99,16 @@ public class PlayerStats : MonoBehaviour
 
     private void setUpModes()
     {
-        
-        
-        foreach(Transform child in modesTransform)
+
+        foreach (Transform child in modesTransform)
         {
             if(child.rotation.z == 0f)
             {
-                child.Rotate(0, 0, 90);
+                child.rotation =  Quaternion.Euler(child.eulerAngles.x, child.eulerAngles.y, 90f);
             }
             else if(child.rotation.z == 90f)
             {
-                child.Rotate(0, 0, 0);
+                child.rotation = Quaternion.Euler(child.eulerAngles.x, child.eulerAngles.y, 0f);
             }
 
             child.localScale = this.baseScale / 2;
@@ -116,6 +116,29 @@ public class PlayerStats : MonoBehaviour
 
         int indexMode = GetComponent<PlayerAimWeapon>().getIndexMode();
         modesTransform[indexMode].localScale = this.baseScale;
+
+        showMode();
+    }
+
+    private void showMode()
+    {
+        char mode = GetComponent<PlayerAimWeapon>().getMode();
+        
+        switch (mode)
+        {
+            case '+':
+                this.txtMode.text = "Additionner";
+                break;
+            case '-':
+                this.txtMode.text = "Soustraire";
+                break;
+            case '×':
+                this.txtMode.text = "Multiplier";
+                break;
+            case '÷':
+                this.txtMode.text = "Diviser";
+                break;
+        }
     }
 
     // HEALTH BAR
@@ -234,6 +257,18 @@ public class PlayerStats : MonoBehaviour
         return pullBattery;
     }
 
+    public void addBattery(int amount) 
+    {
+        this.pullBattery += amount;
+
+        maxfillPowerbar = (float)pullBattery / maxFillbarPower;
+
+        powerbar.fillAmount = ((float)powerLevel / pullBattery) * maxfillPowerbar;
+        powerBorder.fillAmount = maxfillPowerbar + 0.02f;
+        powerBack.fillAmount = maxfillPowerbar;
+
+    }
+
     public int getReloadSpeed()
     {
         return pullBatteryReloadSpeed;
@@ -242,5 +277,10 @@ public class PlayerStats : MonoBehaviour
     public bool getCanVaccum()
     {
         return canVaccum;
+    }
+
+    public bool getCanDash()
+    {
+        return canDash;
     }
 }

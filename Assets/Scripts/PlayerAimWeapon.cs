@@ -46,7 +46,7 @@ public class PlayerAimWeapon : MonoBehaviour {
 
         this.isCharged = false;
         this.indexMode = 0;
-        this.modeList = new List<char>(){'+','-','×','÷'};
+        this.modeList = new List<char>(){'-', '÷', '×', '+' };
 
         playerStats = GetComponent<PlayerStats>();
 
@@ -215,5 +215,10 @@ public class PlayerAimWeapon : MonoBehaviour {
     public int getIndexMode()
     {
         return indexMode;
+    }
+
+    public char getMode()
+    {
+        return this.modeList[indexMode];
     }
 }
