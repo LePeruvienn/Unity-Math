@@ -13,7 +13,13 @@ public class Stats : MonoBehaviour
 
     private TextMeshProUGUI txtScore;
     private TextMeshProUGUI txtManche;
+
+    private TextMeshProUGUI txtSpeed;
+
     private TextMeshProUGUI txtHP;
+    private TextMeshProUGUI txtRegen;
+
+    private TextMeshProUGUI txtPower;
     private TextMeshProUGUI txtBattery;
     private TextMeshProUGUI txtRelaodSpeed;
 
