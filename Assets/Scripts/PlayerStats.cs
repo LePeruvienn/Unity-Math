@@ -31,17 +31,29 @@ public class PlayerStats : MonoBehaviour
     public Image powerBorder;
     public Image powerBack;
 
+    public Transform modeOrigin;
+    private List<Transform> modesTransform = new List<Transform>();
+
     // Calculable
+
+        //Healthbar
     private float maxfillbar;
     public int maxfillbarHP = 1000;
 
     private float maxfillPowerbar;
     public int maxFillbarPower = 500;
 
+    //modes
+    private Vector2 baseScale;
+
+
+
+
     void Start()
     {
         canVaccum = true;
 
+        // HEALTH AND POWER BAR
         maxfillbar = (float) maxHealth/maxfillbarHP;
 
         healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
@@ -54,8 +66,57 @@ public class PlayerStats : MonoBehaviour
         powerbar.fillAmount = ((float)powerLevel / pullBattery) * maxfillPowerbar;
         powerBorder.fillAmount = maxfillPowerbar + 0.02f;
         powerBack.fillAmount = maxfillPowerbar;
+
+        // MODES
+        getAllModesTransform();
+        this.baseScale = modesTransform[0].localScale;
+        setUpModes();
     }
      
+
+    // MODES
+
+    public void getAllModesTransform()
+    {
+        foreach (Transform child in modeOrigin)
+        {
+            this.modesTransform.Add(child);
+        }
+    }
+
+    public void nextMode()
+    {
+        setUpModes();
+        this.modeOrigin.Rotate(0, 0, 90);
+    }
+
+    public void previousMode()
+    {
+        setUpModes();
+        this.modeOrigin.Rotate(0, 0, -90);
+    }
+
+    private void setUpModes()
+    {
+        
+        
+        foreach(Transform child in modesTransform)
+        {
+            if(child.rotation.z == 0f)
+            {
+                child.Rotate(0, 0, 90);
+            }
+            else if(child.rotation.z == 90f)
+            {
+                child.Rotate(0, 0, 0);
+            }
+
+            child.localScale = this.baseScale / 2;
+        }
+
+        int indexMode = GetComponent<PlayerAimWeapon>().getIndexMode();
+        modesTransform[indexMode].localScale = this.baseScale;
+    }
 
     // HEALTH BAR
     public void takeDamage(int damage)
@@ -135,6 +196,7 @@ public class PlayerStats : MonoBehaviour
         this.health = this.maxHealth;
         healthbar.fillAmount = maxfillbar;
     }
+
 
     public int getHealth()
     {
