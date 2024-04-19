@@ -36,7 +36,7 @@ public class PlayerStats : MonoBehaviour
     public int maxfillbarHP = 1000;
 
     private float maxfillPowerbar;
-    public int maxFillbarPower = 700;
+    public int maxFillbarPower = 500;
 
     void Start()
     {
@@ -52,8 +52,8 @@ public class PlayerStats : MonoBehaviour
         maxfillPowerbar = (float) pullBattery / maxFillbarPower;
 
         powerbar.fillAmount = ((float)powerLevel / pullBattery) * maxfillPowerbar;
-        powerBorder.fillAmount = maxfillPowerbar + 0.01f;
-        powerBack.fillAmount = maxfillPowerbar + 0.01f;
+        powerBorder.fillAmount = maxfillPowerbar + 0.02f;
+        powerBack.fillAmount = maxfillPowerbar;
     }
      
 
