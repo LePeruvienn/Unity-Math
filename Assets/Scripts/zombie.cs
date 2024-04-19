@@ -7,6 +7,7 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using UnityEngine.UIElements;
 using TMPro;
+using static UnityEngine.GraphicsBuffer;
 
 public class zombie : MonoBehaviour
 {
@@ -52,10 +53,18 @@ public class zombie : MonoBehaviour
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
-        
-        force = Random.Range(1, 10);
 
-        UpdateScale(force);
+        float newforce;
+        if (force == 0f)
+        {
+            newforce = Random.Range(1, 10);
+        }
+        else
+        {
+            newforce = force;
+        }
+        UpdateScale(newforce);
+        
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -66,8 +75,9 @@ public class zombie : MonoBehaviour
         playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
     }
 
-    public void UpdateScale(float force)
+    public void UpdateScale(float newforce)
     {
+        force = newforce;
         this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
         string Stringforce = force.ToString("R");
         Debug.Log("random = " + Stringforce);
