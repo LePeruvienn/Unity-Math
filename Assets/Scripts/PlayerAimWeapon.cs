@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
@@ -36,11 +37,16 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     private ParticleSystem psVaccum;
 
+    private int indexMode;
+    private List<char> modeList;
+
 
     private void Awake()
     {
-        
+
         this.isCharged = false;
+        this.indexMode = 0;
+        this.modeList = new List<char>(){'-', '÷', '×', '+' };
 
         playerStats = GetComponent<PlayerStats>();
 
@@ -62,6 +68,7 @@ public class PlayerAimWeapon : MonoBehaviour {
     private void Update()
     {
         HandleAiming();
+        HandleMode();
         HandleShooting();
     }
 
@@ -106,6 +113,37 @@ public class PlayerAimWeapon : MonoBehaviour {
             }
         }
         
+    }
+
+    private void HandleMode()
+    {
+
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (this.indexMode + 1 < modeList.Count)
+            {
+                this.indexMode++;
+            }
+            else
+            {
+                this.indexMode = 0;
+            }
+
+            playerStats.nextMode();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (this.indexMode - 1 >= 0)
+            {
+                this.indexMode--;
+            }
+            else
+            {
+                this.indexMode = modeList.Count - 1;
+            }
+
+            playerStats.previousMode();
+        }
     }
 
     private void HandleShooting()
@@ -172,5 +210,15 @@ public class PlayerAimWeapon : MonoBehaviour {
             this.isCharged = false;
             this.zombieCharged = null;
         }
+    }
+
+    public int getIndexMode()
+    {
+        return indexMode;
+    }
+
+    public char getMode()
+    {
+        return this.modeList[indexMode];
     }
 }

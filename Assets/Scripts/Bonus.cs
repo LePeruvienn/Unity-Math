@@ -59,6 +59,7 @@ namespace bonus
         public override void apply(PlayerStats player)
         {
             player.addMaxHealth(healthamount);
+            player.setFullHealth();
         }
     }
 
@@ -101,7 +102,7 @@ namespace bonus
 
         public override void apply(PlayerStats player)
         {
-            player.pullBattery += amount;
+            player.addBattery(this.amount);
         }
     }
 
