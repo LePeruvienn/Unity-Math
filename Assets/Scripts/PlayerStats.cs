@@ -103,6 +103,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Regen()
     {
+        Debug.Log("Regen");
         heal(this.healthRegen);
 
         // Je met ça sinon la barre de vie bug jsp pk
