@@ -74,7 +74,6 @@ public class zombie : MonoBehaviour
 
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
-
     }
 
     public void Update()
@@ -144,7 +143,24 @@ public class zombie : MonoBehaviour
                 //add number
                 float newForce1 = this.force;
                 float newForce2 = playerAimWeapon.getZombieCharged();
-                float newForce = newForce1 + newForce2;
+
+                int actualModif = playerAimWeapon.getIndexMode();
+                float newForce = 1;
+                if (actualModif == 0)
+                {
+                    newForce = newForce1 - newForce2;
+                }else if (actualModif == 1)
+                {
+                    newForce = newForce1 / newForce2;
+                }
+                else if (actualModif == 2)
+                {
+                    newForce = newForce1 * newForce2;
+                }
+                else if (actualModif == 3)
+                {
+                    newForce = newForce1 + newForce2;
+                }
 
                 UpdateScale(newForce);
                 //kill();

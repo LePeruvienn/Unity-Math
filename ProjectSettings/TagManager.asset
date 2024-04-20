@@ -14,6 +14,7 @@ TagManager:
   - Zombie
   - zombieHeadBullet
   - bonusMenuHandler
+  - Modes
   layers:
   - Default
   - TransparentFX
