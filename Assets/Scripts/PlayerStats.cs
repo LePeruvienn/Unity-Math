@@ -37,6 +37,9 @@ public class PlayerStats : MonoBehaviour
     private List<Transform> modesTransform = new List<Transform>();
     public TextMeshProUGUI txtMode;
 
+    public GameObject dashImage;
+    private Animator dashAnimator;
+
     // Calculable
 
         //Healthbar
@@ -69,6 +72,12 @@ public class PlayerStats : MonoBehaviour
         powerBorder.fillAmount = maxfillPowerbar + 0.02f;
         powerBack.fillAmount = maxfillPowerbar;
 
+        // DASH
+
+        this.dashAnimator = dashImage.transform.Find("Dash").GetComponent<Animator>();
+
+        this.dashImage.SetActive(canDash);
+
         // MODES
         getAllModesTransform();
         this.baseScale = modesTransform[0].localScale;
@@ -76,6 +85,18 @@ public class PlayerStats : MonoBehaviour
         //Regen
 
         InvokeRepeating("Regen", 1f, 1f);
+    }
+
+    //Dash
+
+    public void PlayDashAnim()
+    {
+        this.dashAnimator.SetTrigger("reload");
+    }
+
+    public void updateDashImage()
+    {
+        this.dashImage.SetActive(canDash);
     }
 
     //Regen

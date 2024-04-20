@@ -51,7 +51,7 @@ namespace bonus
 
         private int healthamount;
 
-        public BonusMaxhealth(int healthamount) : base("Maxhealth", "Give you more max health", "Bonus/maxhealth")
+        public BonusMaxhealth(int healthamount) : base("Maxhealth", ("Give you more max health ( +" + healthamount + ")"), "Bonus/maxhealth")
         {
             this.healthamount = healthamount;
         }
@@ -79,7 +79,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPower(int amount) : base("Power", "Give you more pull power to youre vaccum", "Bonus/energetic")
+        public BonusPower(int amount) : base("Power", "Give you more pull power to youre vaccum (" + amount + ")", "Bonus/energetic")
         {
             this.amount = amount;
         }
@@ -111,7 +111,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPowerReloadSpeed(int amount) : base("Battery", "Make your vaccum reload faster", "Bonus/battery")
+        public BonusPowerReloadSpeed(int amount) : base("Realod", "Make your vaccum reload faster", "Bonus/battery")
         {
             this.amount = amount;
         }

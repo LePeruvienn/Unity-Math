@@ -81,6 +81,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.playerStats.getCanDash())
         {
+
+            this.playerStats.PlayDashAnim();
+
             this.trailRenderer.emitting = true;
             canDash = false;
             isDashing = true;
