@@ -22,7 +22,6 @@ public class zombie : MonoBehaviour
     private float nextTimeToDamage = 0f;
 
     // Vaccum
-    public float aspiForce;
     private bool isPulled;
 
 
@@ -163,13 +162,20 @@ public class zombie : MonoBehaviour
                 }
 
                 UpdateScale(newForce);
-                //kill();
+
+                if(newForce == 0)
+                {
+                    kill();
+                    gameHandler.addScore(10);
+                }
+                
+
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
 
                 Debug.Log("bullet");
-                transform.position = Vector3.MoveTowards(transform.position, target.position, aspiForce * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, target.position, playerStats.getPullPower() * Time.deltaTime);
                 StartCoroutine(SetIsPulledForDuration(1f));
             }
         }

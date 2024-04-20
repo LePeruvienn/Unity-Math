@@ -36,7 +36,12 @@ public class Stats : MonoBehaviour
 
         Transform playerInfo = this.transform.Find("PlayerInfo");
 
+        this.txtSpeed = playerInfo.Find("Speed").gameObject.GetComponent<TextMeshProUGUI>();
+        
         this.txtHP = playerInfo.Find("HP").gameObject.GetComponent<TextMeshProUGUI>();
+        this.txtRegen = playerInfo.Find("Regen").gameObject.GetComponent<TextMeshProUGUI>();
+
+        this.txtPower = playerInfo.Find("Power").gameObject.GetComponent<TextMeshProUGUI>();
         this.txtBattery = playerInfo.Find("Battery").gameObject.GetComponent<TextMeshProUGUI>();
         this.txtRelaodSpeed = playerInfo.Find("ReloadSpeed").gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -48,7 +53,12 @@ public class Stats : MonoBehaviour
         txtScore.text = "Score : " + gameHandler.getScore();
         txtManche.text = "Manche : " + gameHandler.getNumManche();
 
+        this.txtSpeed.text = "Speed : " + playerStats.getSpeed();
+
         this.txtHP.text = "HP : " + playerStats.getHealth() +  "/" + playerStats.getMaxHealth();
+        this.txtRegen.text = "Regen : " + playerStats.getRegen() + "/s";
+        
+        this.txtPower.text = "Power : " + playerStats.getPullPower();
         this.txtBattery.text = "Battery : " + playerStats.getBattery();
         this.txtRelaodSpeed.text = "Reload Speed : " + playerStats.getReloadSpeed();
 

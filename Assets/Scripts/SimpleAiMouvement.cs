@@ -7,18 +7,25 @@ public class SimpleAiMouvement : MonoBehaviour
 {
     Transform target;
     NavMeshAgent agent;
-    // Start is called before the first frame update
+
+    zombie zombieScript;
+    
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        zombieScript = GetComponent<zombie>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (!zombieScript.getIsDead())
+        {
+            agent.SetDestination(target.position);
+        }
     }
 }

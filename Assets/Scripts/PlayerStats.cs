@@ -72,8 +72,23 @@ public class PlayerStats : MonoBehaviour
         // MODES
         getAllModesTransform();
         this.baseScale = modesTransform[0].localScale;
+
+        //Regen
+
+        InvokeRepeating("Regen", 1f, 1f);
     }
-     
+
+    //Regen
+
+    private void Regen()
+    {
+        heal(this.healthRegen);
+
+        // Je met ça sinon la barre de vie bug jsp pk
+        this.health = this.maxHealth;
+        healthbar.fillAmount = maxfillbar;
+    }
+
 
     // MODES
 
@@ -165,7 +180,7 @@ public class PlayerStats : MonoBehaviour
         if (this.health > maxHealth)
         {
             this.health = maxHealth;
-            healthbar.fillAmount = 100f;
+            healthbar.fillAmount = 1f;
         }
         else
         {
@@ -240,6 +255,11 @@ public class PlayerStats : MonoBehaviour
 
         healthBorder.fillAmount = maxfillbar + 0.01f;
         healthBack.fillAmount = maxfillbar;
+    }
+
+    public int getRegen()
+    {
+        return healthRegen;
     }
 
     public float getSpeed()

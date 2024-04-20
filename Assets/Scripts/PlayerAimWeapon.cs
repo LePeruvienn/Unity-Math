@@ -155,7 +155,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
-                playerStats.usePower(2);
+                playerStats.usePower(5);
             }
         }
         else
@@ -164,7 +164,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             if (Time.time >= nextTimeToFire)
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
-                playerStats.addPower(1);
+                playerStats.addPower(playerStats.getReloadSpeed());
             }
         }
 
