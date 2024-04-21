@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 
 public class PlayerAimWeapon : MonoBehaviour {
 
@@ -225,5 +221,7 @@ public class PlayerAimWeapon : MonoBehaviour {
     {
         return this.zombieCharged;
     }
+
+    public bool isZombieCharged() {  return this.isCharged; }
 
 }

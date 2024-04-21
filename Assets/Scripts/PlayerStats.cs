@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
 
     // Calculable
 
-        //Healthbar
+    //Healthbar
     private float maxfillbar;
     public int maxfillbarHP = 1000;
 
@@ -52,11 +52,19 @@ public class PlayerStats : MonoBehaviour
     //modes
     private Vector2 baseScale;
 
+    private TextMeshPro textMeshProNombre;
 
+    private PlayerAimWeapon playerAimWeapon;
 
 
     void Start()
     {
+
+        playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
+        this.textMeshProNombre = this.GetComponentInChildren<TextMeshPro>();
+
+
+
         canVaccum = true;
 
         // HEALTH AND POWER BAR
@@ -86,9 +94,19 @@ public class PlayerStats : MonoBehaviour
 
         InvokeRepeating("Regen", 1f, 1f);
     }
+    void Update()
+    {
+        if (playerAimWeapon.isZombieCharged())
+        {
+            this.textMeshProNombre.text = playerAimWeapon.getZombieCharged().ToString("R");
+        }
+        else
+        {
+            this.textMeshProNombre.text = "";
+        }
+    }
 
     //Dash
-
     public void PlayDashAnim()
     {
         this.dashAnimator.SetTrigger("reload");
@@ -106,7 +124,7 @@ public class PlayerStats : MonoBehaviour
         heal(this.healthRegen);
 
         // Je met ça sinon la barre de vie bug jsp pk
-        this.health = this.maxHealth;
+        this.health = this.health + 10;
         healthbar.fillAmount = maxfillbar;
     }
 
