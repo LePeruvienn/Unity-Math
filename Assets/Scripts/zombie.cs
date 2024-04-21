@@ -106,7 +106,7 @@ public class zombie : MonoBehaviour
         this.force = newforce;
         this.textMeshPro = this.GetComponentInChildren<TextMeshPro>();
         string Stringforce = force.ToString("R");
-        Debug.Log("random = " + Stringforce);
+        //Debug.Log("random = " + Stringforce);
         this.textMeshPro.text = Stringforce;
         float scaleforce = force * 0.1f;
         float scaleSpeed = force * 0.8f;
@@ -122,7 +122,7 @@ public class zombie : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("OnCollisionEnter2D");
+        //Debug.Log("OnCollisionEnter2D");
         if (this.isDead == false)
         {
             if (other.gameObject.CompareTag("Player"))

@@ -4,10 +4,12 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerStats : MonoBehaviour
 {
-    
+
+    private GameHandler gameHandler;
     // Stats
     public int health;
     public int maxHealth;
@@ -53,15 +55,15 @@ public class PlayerStats : MonoBehaviour
     private Vector2 baseScale;
 
     private TextMeshPro textMeshProNombre;
-
+    private TextMeshPro textMeshProGameOver;
     private PlayerAimWeapon playerAimWeapon;
 
-
+    public GameOverScreen GameOverScreen;
     void Start()
     {
-
+        this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
         playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
-        this.textMeshProNombre = this.GetComponentInChildren<TextMeshPro>();
+        textMeshProNombre = this.GetComponentInChildren<TextMeshPro>();
 
 
 
@@ -104,6 +106,7 @@ public class PlayerStats : MonoBehaviour
         {
             this.textMeshProNombre.text = "";
         }
+
     }
 
     //Dash
@@ -121,12 +124,12 @@ public class PlayerStats : MonoBehaviour
 
     private void Regen()
     {
-        Debug.Log("Regen");
+        //Debug.Log("Regen");
         heal(this.healthRegen);
 
         // Je met ça sinon la barre de vie bug jsp pk
-        this.health = this.health + 10;
-        healthbar.fillAmount = maxfillbar;
+        /*this.health = this.health + healthRegen;
+        healthbar.fillAmount = maxfillbar;*/
     }
 
 
@@ -205,7 +208,12 @@ public class PlayerStats : MonoBehaviour
         {
             this.health = 0;
             healthbar.fillAmount = 0;
+
             Destroy(this.gameObject);
+
+            GameOverScreen.Setup(gameHandler.getScore());
+
+
         }
         else
         {
@@ -226,8 +234,13 @@ public class PlayerStats : MonoBehaviour
         {
             healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
         }
+
+        if (this.health == maxHealth)
+        {
+            healthbar.fillAmount = maxfillbar;
+        }
     }
-    //
+    
 
 
     // POWER BAR
