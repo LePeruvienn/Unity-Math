@@ -133,8 +133,11 @@ public class zombie : MonoBehaviour
                 }
                 else
                 {
-                    playerAimWeapon.setZombieCharged(force);
-                    Destroy(this.gameObject);
+                    if (!playerAimWeapon.isZombieCharged())
+                    {
+                        playerAimWeapon.setZombieCharged(force);
+                        Destroy(this.gameObject);
+                    }
                 }
             }
             else if (other.gameObject.CompareTag("zombieHeadBullet"))
@@ -176,7 +179,7 @@ public class zombie : MonoBehaviour
 
                 Debug.Log("bullet");
                 transform.position = Vector3.MoveTowards(transform.position, target.position, playerStats.getPullPower() * Time.deltaTime);
-                StartCoroutine(SetIsPulledForDuration(1f));
+                StartCoroutine(SetIsPulledForDuration(0.2f));
             }
         }
     }

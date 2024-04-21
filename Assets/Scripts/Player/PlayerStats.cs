@@ -356,4 +356,10 @@ public class PlayerStats : MonoBehaviour
     {
         return canDash;
     }
+
+    public void setCanDash(bool can)
+    {
+        this.canDash = can;
+        this.dashImage.SetActive(can);
+    }
 }

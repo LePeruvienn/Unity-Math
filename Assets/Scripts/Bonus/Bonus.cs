@@ -70,7 +70,7 @@ namespace bonus
 
         public override void apply(PlayerStats player)
         {
-            player.canDash = true;
+            player.setCanDash(true);
         }
     }
 
