@@ -59,6 +59,11 @@ public class PlayerStats : MonoBehaviour
     private PlayerAimWeapon playerAimWeapon;
 
     public GameOverScreen GameOverScreen;
+
+    //Score
+
+    public ScoreData scoreData;
+
     void Start()
     {
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
@@ -95,6 +100,11 @@ public class PlayerStats : MonoBehaviour
         //Regen
 
         InvokeRepeating("Regen", 1f, 1f);
+
+        // Score
+
+        var json = PlayerPrefs.GetString("scores", "{}");
+        scoreData = JsonUtility.FromJson<ScoreData>(json);
     }
     void Update()
     {
@@ -199,6 +209,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    //Score
+    public void SaveScore()
+    {
+        var json = JsonUtility.ToJson(scoreData);
+        PlayerPrefs.SetString("scores", json);
+    }
+
     // HEALTH BAR
     public void takeDamage(int damage)
     {
@@ -212,7 +229,8 @@ public class PlayerStats : MonoBehaviour
             Destroy(this.gameObject);
 
             GameOverScreen.Setup(gameHandler.getScore());
-
+            scoreData.scores.Add(new Score("Anonymous", gameHandler.getNumManche(), gameHandler.getScore()));
+            SaveScore();
 
         }
         else
