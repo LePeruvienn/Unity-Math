@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -58,11 +60,14 @@ public class PlayerStats : MonoBehaviour
     private TextMeshPro textMeshProGameOver;
     private PlayerAimWeapon playerAimWeapon;
 
+    //Game over
     public GameOverScreen GameOverScreen;
+    public GameObject input;
 
     //Score
 
     public ScoreData scoreData;
+    public string name = "Anonymous";
 
     void Start()
     {
@@ -212,8 +217,23 @@ public class PlayerStats : MonoBehaviour
     //Score
     public void SaveScore()
     {
+        
         var json = JsonUtility.ToJson(scoreData);
         PlayerPrefs.SetString("scores", json);
+    }
+
+    public void AddScore()
+    {
+        string str = input.GetComponent<TextMeshProUGUI>().text;
+
+        if(str != "")
+        {
+            this.name = str;
+        }
+        scoreData.scores.Add(new Score(name, gameHandler.getNumManche(), gameHandler.getScore()));
+        SaveScore();
+
+        Debug.Log(scoreData.scores[scoreData.scores.Count-1].name);
     }
 
     // HEALTH BAR
@@ -229,9 +249,6 @@ public class PlayerStats : MonoBehaviour
             Destroy(this.gameObject);
 
             GameOverScreen.Setup(gameHandler.getScore());
-            scoreData.scores.Add(new Score("Anonymous", gameHandler.getNumManche(), gameHandler.getScore()));
-            SaveScore();
-
         }
         else
         {
