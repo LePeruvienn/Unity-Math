@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -6,12 +8,19 @@ public class DialogueTrigger : MonoBehaviour
 
     public bool isInRange;
 
+    private Text interacrUI;
+
+    private void Awake()
+    {
+        interacrUI = GameObject.FindGameObjectWithTag("intUI").GetComponent<Text>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
-            TriggerDialogue();
+            TriggerDialogue(interacrUI);
         }
     }
 
@@ -20,6 +29,7 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isInRange = true;
+            interacrUI.enabled = true;
         }
     }
 
@@ -28,11 +38,13 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isInRange = false;
+            interacrUI.enabled = false;
         }
     }
 
-    public void TriggerDialogue()
+    public void TriggerDialogue(Text interacrUI)
     {
+        interacrUI.enabled = false;
         DialogueManager.instance.StartDialogue(dialogue);
     }
 }
