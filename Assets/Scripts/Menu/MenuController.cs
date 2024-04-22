@@ -6,8 +6,16 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    private Button boutonJouer;
-    private Button boutonQuitter;
+    public GameObject menu;
+    public GameObject score;
+    public GameObject options;
+    public GameObject credit;
+
+
+    void Start()
+    {
+        BackToMain();
+    }
 
     public void changeScene(string sceneName)
     {
@@ -17,5 +25,38 @@ public class MenuController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void BackToMain()
+    {
+        this.menu.SetActive(true);
+        this.score.SetActive(false);
+        this.options.SetActive(false);
+        this.credit.SetActive(false);
+    }
+
+    // GO TO
+    public void GoToScore()
+    {
+        this.menu.SetActive(false);
+        this.score.SetActive(true);
+        this.options.SetActive(false);
+        this.credit.SetActive(false);
+    }
+
+    public void GoToCredit() 
+    {
+        this.menu.SetActive(false);
+        this.score.SetActive(false);
+        this.options.SetActive(false);
+        this.credit.SetActive(true);
+    }
+
+    public void GoToOptions()
+    {
+        this.menu.SetActive(false);
+        this.score.SetActive(false);
+        this.options.SetActive(true);
+        this.credit.SetActive(false);
     }
 }
