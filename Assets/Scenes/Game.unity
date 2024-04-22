@@ -3432,7 +3432,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 89399a7fe77cebf44807d6e7c7ba03b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9911,6 +9911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648cc7feaebd45647ab8fddc7cce2c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 1912893407}
   nameText: {fileID: 61007579}
   dialogueText: {fileID: 780808514}
 --- !u!4 &1656209337
@@ -26767,7 +26768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1912893408
 RectTransform:
   m_ObjectHideFlags: 0

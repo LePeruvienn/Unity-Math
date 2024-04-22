@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject panel;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
@@ -29,6 +31,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        panel.SetActive(true);
+
         nameText.text = dialogue.name;
 
         sentences.Clear();
@@ -50,11 +54,22 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
-        dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentece(sentence));
+    }
+
+    public IEnumerator TypeSentece(string sentece)
+    {
+        dialogueText.text = "";
+        foreach (char lettre in sentece.ToCharArray())
+        {
+            dialogueText.text += lettre;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     public void EndDialogue()
     {
-        Debug.Log("fin");
+        panel.SetActive(false);
     }
 }
