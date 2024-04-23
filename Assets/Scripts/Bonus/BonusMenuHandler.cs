@@ -41,7 +41,7 @@ public class BonusMenuHandler : MonoBehaviour
 
         listeBonus = new List<Bonus>();
 
-        listeBonus.Add(new BonusRegen(1));
+        listeBonus.Add(new BonusRegen(5));
         listeBonus.Add(new BonusSpeed(2));
         listeBonus.Add(new BonusMaxhealth(50));
         listeBonus.Add(new BonusDash());
