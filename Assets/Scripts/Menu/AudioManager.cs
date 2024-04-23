@@ -5,27 +5,26 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [Header("Sounds")]
-    public AudioClip buttonHover;
+    public List<AudioClip> buttonHoverList;
     public AudioClip buttonPressed;
     public AudioClip menuMusic;
 
     public void PlayButtonHover()
     {
-        PlaySound(buttonHover);
-
+        AudioClip audioClip = buttonHoverList[Random.Range(0, this.buttonHoverList.Count)];
+        PlaySound(audioClip);
+        Debug.Log("PlayButtonHover");
     }
 
     public void PlayButtonPressed()
     {
         PlaySound(buttonPressed);
+        Debug.Log("PlayButtonPressed");
     }
 
-    public IEnumerator PlaySound(AudioClip otherClip)
+    public void PlaySound(AudioClip otherClip)
     {
         AudioSource audio = GetComponent<AudioSource>();
-
-        audio.Play();
-        yield return new WaitForSeconds(audio.clip.length);
         audio.clip = otherClip;
         audio.Play();
     }
