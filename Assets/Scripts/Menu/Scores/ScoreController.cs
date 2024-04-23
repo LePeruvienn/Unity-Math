@@ -35,6 +35,7 @@ public class ScoreController : MonoBehaviour
 
     public void DeleteData()
     {
-        //Deletedata
+        scoreData = new ScoreData();
+        SaveScore();
     }
 }

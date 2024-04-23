@@ -63,6 +63,23 @@ namespace bonus
         }
     }
 
+    public class BonusRegen : Bonus
+    {
+
+        private int amount;
+
+        public BonusRegen(int amount) : base("Health Regen", ("Give you more health regen ( +" + amount + ")"), "Bonus/regen")
+        {
+            this.amount = amount;
+        }
+
+        public override void apply(PlayerStats player)
+        {
+            player.addRegen(amount);
+            player.setFullHealth();
+        }
+    }
+
     public class BonusDash : Bonus
     {
 

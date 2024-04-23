@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -57,11 +59,14 @@ public class PlayerStats : MonoBehaviour
     private TextMeshPro textMeshProNombre;
     private PlayerAimWeapon playerAimWeapon;
 
+    //Game over
     public GameOverScreen GameOverScreen;
+    public GameObject input;
 
     //Score
 
     public ScoreData scoreData;
+    public string name = "Anonymous";
 
     void Start()
     {
@@ -133,12 +138,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Regen()
     {
-        //Debug.Log("Regen");
         heal(this.healthRegen);
-
-        // Je met ça sinon la barre de vie bug jsp pk
-        /*this.health = this.health + healthRegen;
-        healthbar.fillAmount = maxfillbar;*/
     }
 
 
@@ -211,8 +211,23 @@ public class PlayerStats : MonoBehaviour
     //Score
     public void SaveScore()
     {
+        
         var json = JsonUtility.ToJson(scoreData);
         PlayerPrefs.SetString("scores", json);
+    }
+
+    public void AddScore()
+    {
+        string str = input.GetComponent<TextMeshProUGUI>().text;
+
+        if(str != "")
+        {
+            this.name = str;
+        }
+        scoreData.scores.Add(new Score(name, gameHandler.getNumManche(), gameHandler.getScore()));
+        SaveScore();
+
+        Debug.Log(scoreData.scores[scoreData.scores.Count-1].name);
     }
 
     // HEALTH BAR
@@ -225,12 +240,9 @@ public class PlayerStats : MonoBehaviour
             this.health = 0;
             healthbar.fillAmount = 0;
 
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
 
             GameOverScreen.Setup(gameHandler.getScore());
-            scoreData.scores.Add(new Score("Anonymous", gameHandler.getNumManche(), gameHandler.getScore()));
-            SaveScore();
-
         }
         else
         {
@@ -330,6 +342,11 @@ public class PlayerStats : MonoBehaviour
     public int getRegen()
     {
         return healthRegen;
+    }
+
+    public void addRegen(int amount)
+    {
+        this.healthRegen += amount;
     }
 
     public float getSpeed()
