@@ -6,6 +6,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
+    // Inputs
+    public GameObject options;
+    private InputBinding inputs;
+
+    //AUDIO
+    public GameObject AudioManager;
+
+    public float playRate = 5f;
+    private float nextTimeToPlay = 0f;
+
     //Players Stats
     private PlayerStats playerStats;
 
@@ -30,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        this.inputs = options.GetComponent<InputBinding>();
         this.playerStats = GetComponent<PlayerStats>();
         this.animator = GetComponent<Animator>();
         this.trailRenderer = transform.Find("Trail").gameObject.GetComponent<TrailRenderer>();
@@ -44,11 +55,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
 
-        if(movement.x == 0 && movement.y == 0)
+        HandleMoving();
+
+        if (movement.x == 0 && movement.y == 0)
         {
             isMoving = false;
         }
@@ -73,10 +83,47 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // A ACTIVER SI TU VEUT ENTENDRE LE BRUIT DE TES PAS JSP SI C'EST BIEN DONC JE COMMENTE
+        /* 
+        if (isMoving && Time.time >= nextTimeToPlay)
+        {
+            nextTimeToPlay = Time.time + 1f / playRate;
+            AudioManager.GetComponent<AudioManager>().PlayPlayerWalking();
+        }
+        */
+
         rb.velocity = new Vector2(movement.x * playerStats.speed, movement.y * playerStats.speed);
-        //rb.MovePosition(rb.position + movement * playerStats.speed * Time.fixedDeltaTime);
     }
 
+    public void HandleMoving()
+    {
+        float movX = 0;
+        float movY = 0;
+
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["haut"]))
+        {
+            movY += 1;
+        }
+
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["bas"]))
+        {
+            movY += -1;
+        }
+
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["gauche"]))
+        {
+            movX += -1;
+        }
+
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["droite"]))
+        {
+            movX += 1;
+        }
+
+        movement.x = movX;
+        movement.y = movY;
+
+    }
     private IEnumerator Dash()
     {
         if (this.playerStats.getCanDash())

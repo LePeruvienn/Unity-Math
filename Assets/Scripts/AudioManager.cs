@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Sounds")]
+    [Header("Menu")]
     public List<AudioClip> buttonHoverList;
     public AudioClip buttonPressed;
-    public AudioClip menuMusic;
 
+    [Header("Game")]
+    public List<AudioClip> playerWalkingList;
+    public AudioClip BonusTime;
+    public AudioClip BonusSelect;
+    public AudioClip BonusHover;
+
+    // MENU
     public void PlayButtonHover()
     {
         AudioClip audioClip = buttonHoverList[Random.Range(0, this.buttonHoverList.Count)];
@@ -25,5 +31,13 @@ public class AudioManager : MonoBehaviour
         AudioSource audio = GetComponent<AudioSource>();
         audio.clip = otherClip;
         audio.Play();
+    }
+
+    // GAME
+
+    public void PlayPlayerWalking()
+    {
+        AudioClip audioClip = playerWalkingList[Random.Range(0, this.playerWalkingList.Count)];
+        PlaySound(audioClip);
     }
 }

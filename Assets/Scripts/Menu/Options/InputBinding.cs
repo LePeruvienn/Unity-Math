@@ -60,6 +60,7 @@ public class InputBinding : MonoBehaviour
                 }
             }
         }
+
     }
 
     public void Bind(string axis)
@@ -104,6 +105,11 @@ public class InputBinding : MonoBehaviour
 
         //Autres
         this.BtnInterragir.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode) inputsDictionary["intéragir"]).ToString();
+    }
+
+    public Dictionary<string, char> getInputDico()
+    {
+        return this.inputsDictionary;
     }
 
     private class InputsData
