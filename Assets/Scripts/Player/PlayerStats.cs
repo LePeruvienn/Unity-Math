@@ -55,7 +55,6 @@ public class PlayerStats : MonoBehaviour
     private Vector2 baseScale;
 
     private TextMeshPro textMeshProNombre;
-    private TextMeshPro textMeshProGameOver;
     private PlayerAimWeapon playerAimWeapon;
 
     public GameOverScreen GameOverScreen;
@@ -110,7 +109,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (playerAimWeapon.isZombieCharged())
         {
-            this.textMeshProNombre.text = playerAimWeapon.getZombieCharged().ToString("R");
+            this.textMeshProNombre.text = playerAimWeapon.getZombieCharged().ToString();
         }
         else
         {
