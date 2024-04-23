@@ -246,7 +246,7 @@ public class PlayerStats : MonoBehaviour
             this.health = 0;
             healthbar.fillAmount = 0;
 
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
 
             GameOverScreen.Setup(gameHandler.getScore());
         }

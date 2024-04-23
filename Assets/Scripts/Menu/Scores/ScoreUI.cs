@@ -11,6 +11,11 @@ public class ScoreUI : MonoBehaviour
     void Start()
     {
 
+        SetUpUI();
+    }
+
+    public void SetUpUI()
+    {
         var scores = scoreController.GetHighScores().ToArray();
 
         for (int i = 0; i < scores.Length; i++)
@@ -23,9 +28,18 @@ public class ScoreUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetUI()
     {
-        
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void ResetScore()
+    {
+        scoreController.DeleteData();
+        ResetUI();
+        SetUpUI();
     }
 }
