@@ -93,7 +93,7 @@ public class InputBinding : MonoBehaviour
         this.BtnHaut.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["haut"]).ToString();
         this.BtnBas.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["bas"]).ToString();
         this.BtnGauche.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["gauche"]).ToString();
-        this.BtnDroite.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["drite"]).ToString();
+        this.BtnDroite.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["droite"]).ToString();
 
         // Arme
         this.btnAspirer.transform.Find("Button").Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = ((KeyCode)inputsDictionary["aspirer"]).ToString();
