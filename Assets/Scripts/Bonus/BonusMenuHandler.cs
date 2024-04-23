@@ -42,12 +42,12 @@ public class BonusMenuHandler : MonoBehaviour
         listeBonus = new List<Bonus>();
 
         listeBonus.Add(new BonusRegen(1));
-        //listeBonus.Add(new BonusSpeed(2));
-        //listeBonus.Add(new BonusMaxhealth(50));
-        //listeBonus.Add(new BonusDash());
-        //listeBonus.Add(new BonusPower(10));
-        //listeBonus.Add(new BonusPowerBattery(30));
-        //listeBonus.Add(new BonusPowerReloadSpeed(5));
+        listeBonus.Add(new BonusSpeed(2));
+        listeBonus.Add(new BonusMaxhealth(50));
+        listeBonus.Add(new BonusDash());
+        listeBonus.Add(new BonusPower(10));
+        listeBonus.Add(new BonusPowerBattery(30));
+        listeBonus.Add(new BonusPowerReloadSpeed(5));
 
         RandomBonus();
 
