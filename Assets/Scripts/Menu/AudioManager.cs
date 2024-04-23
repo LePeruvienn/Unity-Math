@@ -13,13 +13,11 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip audioClip = buttonHoverList[Random.Range(0, this.buttonHoverList.Count)];
         PlaySound(audioClip);
-        Debug.Log("PlayButtonHover");
     }
 
     public void PlayButtonPressed()
     {
         PlaySound(buttonPressed);
-        Debug.Log("PlayButtonPressed");
     }
 
     public void PlaySound(AudioClip otherClip)
