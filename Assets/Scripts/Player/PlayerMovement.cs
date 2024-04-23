@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isMoving", isMoving);
 
-        if(Input.GetKeyDown(KeyCode.Space) && this.canDash)
+        if(Input.GetKey((KeyCode)inputs.getInputDico()["dash"]) && this.canDash)
         {
             StartCoroutine(Dash());
         }

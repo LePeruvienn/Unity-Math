@@ -36421,6 +36421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
+  options: {fileID: 953017964}
   spriteRenderer: {fileID: 1707050828}
   weaponRenderer: {fileID: 0}
   firePoint: {fileID: 391643689}

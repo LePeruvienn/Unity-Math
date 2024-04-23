@@ -5,6 +5,12 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     public Camera cam;
 
+    // Inputs
+    public GameObject options;
+    private InputBinding inputs;
+
+    //
+
     private PlayerStats playerStats;
 
     public SpriteRenderer spriteRenderer;
@@ -43,6 +49,8 @@ public class PlayerAimWeapon : MonoBehaviour {
         this.isCharged = false;
         this.indexMode = 0;
         this.modeList = new List<char>(){'-', '÷', '×', '+' };
+
+        this.inputs = options.GetComponent<InputBinding>();
 
         playerStats = GetComponent<PlayerStats>();
 
@@ -144,7 +152,7 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     private void HandleShooting()
     {
-        if (Input.GetButton("Fire2") && !this.isCharged && playerStats.getCanVaccum())
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["aspirer"]) && !this.isCharged && playerStats.getCanVaccum())
         {
             this.psVaccum.Play();
             if (Time.time >= nextTimeToFire)
@@ -165,7 +173,7 @@ public class PlayerAimWeapon : MonoBehaviour {
         }
 
 
-        if(Input.GetButton("Fire1"))
+        if(Input.GetKey((KeyCode)inputs.getInputDico()["expulser"]))
         {
             ShootCharge();
             weaponTransform.Find("zombieHead").GetComponentInChildren<Renderer>().enabled = false;
