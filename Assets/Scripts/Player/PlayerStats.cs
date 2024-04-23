@@ -139,12 +139,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Regen()
     {
-        //Debug.Log("Regen");
         heal(this.healthRegen);
-
-        // Je met ça sinon la barre de vie bug jsp pk
-        /*this.health = this.health + healthRegen;
-        healthbar.fillAmount = maxfillbar;*/
     }
 
 
@@ -348,6 +343,11 @@ public class PlayerStats : MonoBehaviour
     public int getRegen()
     {
         return healthRegen;
+    }
+
+    public void addRegen(int amount)
+    {
+        this.healthRegen += amount;
     }
 
     public float getSpeed()
