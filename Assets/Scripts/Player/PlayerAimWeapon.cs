@@ -5,6 +5,8 @@ public class PlayerAimWeapon : MonoBehaviour {
 
     public Camera cam;
 
+    private AudioManager AudioManager;
+
     // Inputs
     public GameObject options;
     private InputBinding inputs;
@@ -51,6 +53,8 @@ public class PlayerAimWeapon : MonoBehaviour {
         this.modeList = new List<char>(){'-', '÷', '×', '+' };
 
         this.inputs = options.GetComponent<InputBinding>();
+
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
         playerStats = GetComponent<PlayerStats>();
 
@@ -134,6 +138,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             }
 
             playerStats.nextMode();
+            this.AudioManager.PlayModeSwitch();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
@@ -147,6 +152,7 @@ public class PlayerAimWeapon : MonoBehaviour {
             }
 
             playerStats.previousMode();
+            this.AudioManager.PlayModeSwitch();
         }
     }
 

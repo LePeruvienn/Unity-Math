@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     public GameObject ZombieheadAudioObj;
     private AudioSource ZombieheadAudioSource;
 
+    public GameObject ModeAudioObj;
+    private AudioSource ModeAudioSource;
+
 
     [Header("Menu")]
     public List<AudioClip> buttonHoverList;
@@ -28,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip bonusTime;
     public AudioClip bonusSelect;
     public AudioClip zombieSpawn;
+    public AudioClip modeSwitch;
 
     void Start()
     {
@@ -38,6 +42,8 @@ public class AudioManager : MonoBehaviour
         this.WeaponAudioSource = WeaponAudioObj.GetComponent<AudioSource>();
 
         this.ZombieheadAudioSource = ZombieheadAudioObj.GetComponent<AudioSource>();
+
+        this.ModeAudioSource = ModeAudioObj.GetComponent<AudioSource>();
     }
 
 
@@ -97,4 +103,10 @@ public class AudioManager : MonoBehaviour
         this.ZombieheadAudioSource.clip = zombieSpawn;
         this.ZombieheadAudioSource.Play();
     }
+    public void PlayModeSwitch()
+    {
+        this.ModeAudioSource.clip = modeSwitch;
+        this.ModeAudioSource.Play();
+    }
+
 }
