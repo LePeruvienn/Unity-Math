@@ -19,7 +19,7 @@ public class GameHandler : MonoBehaviour
         this.score = 0;
         this.numManche = 0;
         this.zombieEnVie = 0;
-        
+        Application.targetFrameRate = 120;
         this.stats = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Stats>();
     }
 
