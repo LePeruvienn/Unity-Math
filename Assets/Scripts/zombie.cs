@@ -236,7 +236,7 @@ public class zombie : MonoBehaviour
         while(col.IsTouching(target.GetComponent<Collider2D>()))
         {
             AudioManager.PlayDamage();
-            playerStats.takeDamage(10);
+            playerStats.takeDamage(this.damage);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -250,4 +250,8 @@ public class zombie : MonoBehaviour
         return this.isPulled;
     }
 
+    public void setDamage(int damage)
+    {
+        this.damage = damage;
+    }
 }
