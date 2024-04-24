@@ -301,9 +301,10 @@ namespace NavMeshPlus.Components.Editors
         [DrawGizmo(GizmoType.Selected | GizmoType.Active | GizmoType.Pickable)]
         static void RenderBoxGizmoSelected(NavMeshSurface navSurface, GizmoType gizmoType)
         {
-            //navSurface.navMeshDataInstance.FlagAsInSelectionHierarchy();
-            var method = navSurface.navMeshDataInstance.GetType().GetMethod("FlagAsInSelectionHierarchy", BindingFlags.NonPublic | BindingFlags.Instance);
-            method.Invoke(navSurface.navMeshDataInstance, null);
+ 
+                //navSurface.navMeshDataInstance.FlagAsInSelectionHierarchy();
+                var method = navSurface.navMeshDataInstance.GetType().GetMethod("FlagAsInSelectionHierarchy", BindingFlags.NonPublic | BindingFlags.Instance);
+                method.Invoke(navSurface.navMeshDataInstance, null);
             RenderBoxGizmo(navSurface, gizmoType, true);
         }
 

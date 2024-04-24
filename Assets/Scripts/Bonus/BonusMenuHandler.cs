@@ -58,6 +58,7 @@ public class BonusMenuHandler : MonoBehaviour
     public void RandomBonus()
     {
         int randomIndex;
+        int randomIndex2;
         System.Random rand = new System.Random();
 
         // 1 // On récupère le bonus qu'on va mettre dans la première carte :
@@ -68,9 +69,14 @@ public class BonusMenuHandler : MonoBehaviour
 
         // 2 // On récupère le bonus qu'on va mettre dans la deuxième carte :
 
-        randomIndex = rand.Next(0, listeBonus.Count);
 
-        this.bonus2 = listeBonus[randomIndex];
+        randomIndex2 = rand.Next(0, listeBonus.Count);
+        while(randomIndex == randomIndex2)
+        {
+            randomIndex2 = rand.Next(0, listeBonus.Count);
+        }
+
+        this.bonus2 = listeBonus[randomIndex2];
 
         // On affiche les bonus sur les cartes
 
