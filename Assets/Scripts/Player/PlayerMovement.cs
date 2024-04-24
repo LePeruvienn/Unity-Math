@@ -83,14 +83,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // A ACTIVER SI TU VEUT ENTENDRE LE BRUIT DE TES PAS JSP SI C'EST BIEN DONC JE COMMENTE
-        /* 
         if (isMoving && Time.time >= nextTimeToPlay)
         {
             nextTimeToPlay = Time.time + 1f / playRate;
             AudioManager.GetComponent<AudioManager>().PlayPlayerWalking();
         }
-        */
 
         rb.velocity = new Vector2(movement.x * playerStats.speed, movement.y * playerStats.speed);
     }
@@ -128,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.playerStats.getCanDash())
         {
-
+            AudioManager.GetComponent<AudioManager>().PlayPlayerDash();
             this.playerStats.PlayDashAnim();
 
             this.trailRenderer.emitting = true;

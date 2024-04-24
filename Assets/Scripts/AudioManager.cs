@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
     public GameObject ModeAudioObj;
     private AudioSource ModeAudioSource;
 
+    public GameObject DashAudioObj;
+    private AudioSource DashAudioSource;
+
 
     [Header("Menu")]
     public List<AudioClip> buttonHoverList;
@@ -36,6 +39,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip zombieSpawn;
     public AudioClip modeSwitch;
     public AudioClip aspiShoot;
+    public List<AudioClip> playerDashList;
+    public AudioClip zombieAdd;
 
     [Header("Aspiration")]
     public AudioClip aspiDebut;
@@ -56,6 +61,8 @@ public class AudioManager : MonoBehaviour
         this.ZombieheadAudioSource = ZombieheadAudioObj.GetComponent<AudioSource>();
 
         this.ModeAudioSource = ModeAudioObj.GetComponent<AudioSource>();
+
+        this.DashAudioSource = DashAudioObj.GetComponent<AudioSource>();
     }
 
 
@@ -92,8 +99,19 @@ public class AudioManager : MonoBehaviour
 
     public void PlayPlayerWalking()
     {
-        AudioClip audioClip = playerWalkingList[Random.Range(0, this.playerWalkingList.Count)];
-        PlaySound(audioClip);
+        if (!(playerDashList.Contains(this.PlayerAudioSource.clip) && this.PlayerAudioSource.isPlaying))
+        {
+            AudioClip audioClip = playerWalkingList[Random.Range(0, this.playerWalkingList.Count)];
+            this.PlayerAudioSource.clip = audioClip;
+            this.PlayerAudioSource.Play();
+        }
+    }
+
+    public void PlayPlayerDash()
+    {
+        AudioClip audioClip = playerDashList[Random.Range(0, this.playerDashList.Count)];
+        this.DashAudioSource.clip = audioClip;
+        this.DashAudioSource.Play();
     }
 
     public void PlayBonusTime()
@@ -146,6 +164,12 @@ public class AudioManager : MonoBehaviour
         this.AspiAudioSource.loop = false;
         this.AspiAudioSource.clip = aspiFin;
         this.AspiAudioSource.Play();
+    }
+
+    public void PlayZombieAdd()
+    {
+        this.ZombieheadAudioSource.clip = zombieAdd;
+        this.ZombieheadAudioSource.Play();
     }
 
     public bool CanPlayAspiPendant()
