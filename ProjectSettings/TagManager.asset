@@ -17,6 +17,8 @@ TagManager:
   - Modes
   - ScoreGameOver
   - ScreenGameOver
+  - Audio
+  - AudioManager
   layers:
   - Default
   - TransparentFX

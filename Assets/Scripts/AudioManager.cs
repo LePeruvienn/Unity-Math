@@ -9,10 +9,19 @@ public class AudioManager : MonoBehaviour
     public AudioClip buttonPressed;
 
     [Header("Game")]
+    public AudioClip gameOver;
     public List<AudioClip> playerWalkingList;
-    public AudioClip BonusTime;
-    public AudioClip BonusSelect;
-    public AudioClip BonusHover;
+    public AudioClip bonusTime;
+    public AudioClip bonusSelect;
+    public AudioClip zombieHit;
+
+
+    public void PlaySound(AudioClip otherClip)
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = otherClip;
+        audio.Play();
+    }
 
     // MENU
     public void PlayButtonHover()
@@ -26,18 +35,30 @@ public class AudioManager : MonoBehaviour
         PlaySound(buttonPressed);
     }
 
-    public void PlaySound(AudioClip otherClip)
-    {
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.clip = otherClip;
-        audio.Play();
-    }
-
     // GAME
 
     public void PlayPlayerWalking()
     {
         AudioClip audioClip = playerWalkingList[Random.Range(0, this.playerWalkingList.Count)];
         PlaySound(audioClip);
+    }
+
+    public void PlayDamage()
+    {
+        PlaySound(zombieHit);
+    }
+
+    public void PlayBonusTime()
+    {
+        PlaySound(zombieHit);
+    }
+    public void PlayBonusSelect()
+    {
+        PlaySound(bonusSelect);
+    }
+
+    public void PlayGameOver()
+    {
+        PlaySound(gameOver);
     }
 }

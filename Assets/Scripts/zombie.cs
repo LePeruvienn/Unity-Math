@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 
 public class zombie : MonoBehaviour
 {
+    private AudioManager AudioManager;
+    
     // stats
     public float force;
     public int damage;
@@ -51,6 +53,8 @@ public class zombie : MonoBehaviour
 
         this.isDead = false;
         this.isPulled = false;
+
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
@@ -230,6 +234,7 @@ public class zombie : MonoBehaviour
     {
         while(col.IsTouching(target.GetComponent<Collider2D>()))
         {
+            AudioManager.PlayDamage();
             playerStats.takeDamage(10);
             yield return new WaitForSeconds(1f);
         }
