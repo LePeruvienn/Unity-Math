@@ -24,7 +24,6 @@ public class zombieHeadBullet : MonoBehaviour
                 this.AudioManager.PlayZombieSpawn();
                 GameObject Zombie = Object.Instantiate(ZombiePrefab, this.gameObject.transform.position, Quaternion.identity);
                 Zombie.GetComponent<zombie>().UpdateScale(getZombieCharged);
-                Debug.Log("getZombieCharged = " + getZombieCharged);
             }
             Destroy(this.gameObject);
         }

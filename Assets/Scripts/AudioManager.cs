@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour
     public GameObject WeaponAudioObj;
     private AudioSource WeaponAudioSource;
 
+    public GameObject AspiAudioObj;
+    private AudioSource AspiAudioSource;
+
     public GameObject ZombieheadAudioObj;
     private AudioSource ZombieheadAudioSource;
 
@@ -32,12 +35,21 @@ public class AudioManager : MonoBehaviour
     public AudioClip bonusSelect;
     public AudioClip zombieSpawn;
     public AudioClip modeSwitch;
+    public AudioClip aspiShoot;
+
+    [Header("Aspiration")]
+    public AudioClip aspiDebut;
+    public AudioClip aspiPedant;
+    public AudioClip aspiFin;
 
     void Start()
     {
-        this.BackgroundMusicSource = BackgroundMusicObj.GetComponent<AudioSource>();
+
+        this.AspiAudioSource = AspiAudioObj.GetComponent<AudioSource>();
 
         this.PlayerAudioSource = PlayerAudioObj.GetComponent<AudioSource>();
+
+        this.WeaponAudioSource = WeaponAudioObj.GetComponent<AudioSource>();
 
         this.WeaponAudioSource = WeaponAudioObj.GetComponent<AudioSource>();
 
@@ -109,4 +121,35 @@ public class AudioManager : MonoBehaviour
         this.ModeAudioSource.Play();
     }
 
+    public void PlayAspiShoot()
+    {
+        this.WeaponAudioSource.clip = aspiShoot;
+        this.WeaponAudioSource.Play();
+    }
+    
+    public void PlayAspiDebut()
+    {
+        this.AspiAudioSource.loop = false;
+        this.AspiAudioSource.clip = aspiDebut;
+        this.AspiAudioSource.Play();
+    }
+
+    public void PlayAspiPendant()
+    {
+        this.AspiAudioSource.loop = true;
+        this.AspiAudioSource.clip = aspiPedant;
+        this.AspiAudioSource.Play();
+    }
+
+    public void PlayAspiFin()
+    {
+        this.AspiAudioSource.loop = false;
+        this.AspiAudioSource.clip = aspiFin;
+        this.AspiAudioSource.Play();
+    }
+
+    public bool CanPlayAspiPendant()
+    {
+        return !this.AspiAudioSource.isPlaying && this.AspiAudioSource.clip == this.aspiDebut;
+    }
 }

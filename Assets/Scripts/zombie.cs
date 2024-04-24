@@ -179,13 +179,9 @@ public class zombie : MonoBehaviour
                     kill();
                     gameHandler.addScore(10);
                 }
-                
-
             }
             else if (other.gameObject.CompareTag("bullet"))
             {
-
-                Debug.Log("bullet");
                 transform.position = Vector3.MoveTowards(transform.position, target.position, playerStats.getPullPower() * Time.deltaTime);
                 StartCoroutine(SetIsPulledForDuration(0.2f));
             }

@@ -44,6 +44,9 @@ public class PlayerAimWeapon : MonoBehaviour {
     private int indexMode;
     private List<char> modeList;
 
+    private bool isButtonPressed;
+    private bool canPlayAspiFin;
+
 
     private void Awake()
     {
@@ -71,6 +74,9 @@ public class PlayerAimWeapon : MonoBehaviour {
         this.psVaccum = weaponTransform.Find("VaccumParticle").GetComponentInChildren<ParticleSystem>();
         this.psVaccum.Stop();
 
+        isButtonPressed = false;
+        canPlayAspiFin = false;
+
     }
 
     private void Update()
@@ -78,6 +84,7 @@ public class PlayerAimWeapon : MonoBehaviour {
         HandleAiming();
         HandleMode();
         HandleShooting();
+        HandleAspiSound();
     }
 
     private void HandleAiming()
@@ -187,10 +194,40 @@ public class PlayerAimWeapon : MonoBehaviour {
         }
     }
 
+    public void HandleAspiSound()
+    {
+
+        if (Input.GetKey((KeyCode)inputs.getInputDico()["aspirer"]) && playerStats.getCanVaccum() && !this.isCharged)
+        {
+            // Play the first part of the activation sound if not already playing
+            if (!isButtonPressed)
+            {
+                isButtonPressed = true;
+                canPlayAspiFin = true;
+                this.AudioManager.PlayAspiDebut();
+            }
+        }
+        else if ((Input.GetKeyUp((KeyCode)inputs.getInputDico()["aspirer"]) || !playerStats.getCanVaccum() || this.isCharged) && canPlayAspiFin)
+        {
+            // Stop playing any part of the sound if the button is released
+            isButtonPressed = false;
+            canPlayAspiFin = false;
+            this.AudioManager.PlayAspiFin();
+        }
+
+        // Check if the first part of the activation sound has finished playing
+        if (this.AudioManager.CanPlayAspiPendant() && isButtonPressed && !this.isCharged)
+        {
+            // Play the second part of the activation sound
+            this.AudioManager.PlayAspiPendant();
+        }
+    }
+
     private void Shoot()
     {
         if (!this.isCharged)
         {
+
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -198,12 +235,15 @@ public class PlayerAimWeapon : MonoBehaviour {
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
             Destroy(bullet, 0.2f);
         }
+
     }
 
     private void ShootCharge()
     {
         if (this.isCharged)
         {
+            this.AudioManager.PlayAspiShoot();
+
             GameObject zombieHeadbullet = Instantiate(zombieHeadBulletPrefab, firePoint.position, firePoint.rotation);
 
 
