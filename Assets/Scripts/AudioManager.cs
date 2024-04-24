@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Audio Source")]
+    public GameObject BackgroundMusicObj;
+    private AudioSource BackgroundMusicSource;
+
+
     [Header("Menu")]
     public List<AudioClip> buttonHoverList;
     public AudioClip buttonPressed;
@@ -14,6 +19,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip bonusTime;
     public AudioClip bonusSelect;
     public AudioClip zombieHit;
+    public List<AudioClip> zombieDeathList;
+    public AudioClip tireHead;
+    public AudioClip aspireDebut;
+    public AudioClip aspirePendant;
+    public AudioClip aspireFin;
+
+    void Start()
+    {
+        this.BackgroundMusicSource = BackgroundMusicObj.GetComponent<AudioSource>();
+    }
 
 
     public void PlaySound(AudioClip otherClip)
@@ -21,6 +36,16 @@ public class AudioManager : MonoBehaviour
         AudioSource audio = GetComponent<AudioSource>();
         audio.clip = otherClip;
         audio.Play();
+    }
+
+    public void PlayBackGroundMusic()
+    {
+        this.BackgroundMusicSource.Play();
+    }
+
+    public void StopBackGroundMusic()
+    {
+        this.BackgroundMusicSource.Stop();
     }
 
     // MENU
@@ -50,7 +75,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBonusTime()
     {
-        PlaySound(zombieHit);
+        PlaySound(bonusTime);
     }
     public void PlayBonusSelect()
     {
@@ -60,5 +85,16 @@ public class AudioManager : MonoBehaviour
     public void PlayGameOver()
     {
         PlaySound(gameOver);
+    }
+
+    public void PlayTirehead()
+    {
+        PlaySound(tireHead);
+    }
+
+    public void PlayZombieDeath()
+    {
+        AudioClip audioClip = zombieDeathList[Random.Range(0, zombieDeathList.Count)];
+        PlaySound(audioClip);
     }
 }

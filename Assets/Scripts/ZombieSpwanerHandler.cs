@@ -9,6 +9,8 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class ZombieSpwanerHandler : MonoBehaviour
 {
 
+    private AudioManager AudioManager;
+
     public int zombieMax;
     public int zombieMin;
 
@@ -21,6 +23,8 @@ public class ZombieSpwanerHandler : MonoBehaviour
 
     void Start()
     {
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
         this.listeSpwaner = new List<Transform>();
@@ -72,6 +76,7 @@ public class ZombieSpwanerHandler : MonoBehaviour
         Debug.Log("Tout les zombie sont mort !");
 
         this.bonusMenu.SetActive(true);
+        AudioManager.PlayBonusTime();
 
 
         Debug.Log("Début de la prochaine manche");

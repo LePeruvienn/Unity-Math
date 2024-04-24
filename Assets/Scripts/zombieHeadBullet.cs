@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class zombieHeadBullet : MonoBehaviour
 {
+    private AudioManager AudioManager;
+
     public GameObject ZombiePrefab;
 
     void Start()
     {
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>());
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -20,7 +23,6 @@ public class zombieHeadBullet : MonoBehaviour
                 float getZombieCharged = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().getZombieCharged();
                 GameObject Zombie = Object.Instantiate(ZombiePrefab, this.gameObject.transform.position, Quaternion.identity);
                 Zombie.GetComponent<zombie>().UpdateScale(getZombieCharged);
-                Debug.Log("getZombieCharged = " + getZombieCharged);
             }
             Destroy(this.gameObject);
         }

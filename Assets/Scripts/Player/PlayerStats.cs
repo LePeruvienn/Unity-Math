@@ -17,6 +17,8 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth;
     public int healthRegen;
 
+    public bool isDead;
+
     public float speed;
 
     private bool canVaccum;
@@ -70,6 +72,9 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+
+        this.isDead = false;
+        
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
         playerAimWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>();
         textMeshProNombre = this.GetComponentInChildren<TextMeshPro>();
@@ -240,8 +245,8 @@ public class PlayerStats : MonoBehaviour
             this.health = 0;
             healthbar.fillAmount = 0;
 
+            this.isDead = true;
             this.gameObject.SetActive(false);
-
             GameOverScreen.Setup(gameHandler.getScore());
         }
         else
@@ -252,21 +257,24 @@ public class PlayerStats : MonoBehaviour
 
     public void heal(int healvalue)
     {
-        this.health += healvalue;
+        if (!isDead)
+        {
+            this.health += healvalue;
 
-        if (this.health > maxHealth)
-        {
-            this.health = maxHealth;
-            healthbar.fillAmount = 1f;
-        }
-        else
-        {
-            healthbar.fillAmount = ((float) health / maxHealth) * maxfillbar;
-        }
+            if (this.health > maxHealth)
+            {
+                this.health = maxHealth;
+                healthbar.fillAmount = 1f;
+            }
+            else
+            {
+                healthbar.fillAmount = ((float)health / maxHealth) * maxfillbar;
+            }
 
-        if (this.health == maxHealth)
-        {
-            healthbar.fillAmount = maxfillbar;
+            if (this.health == maxHealth)
+            {
+                healthbar.fillAmount = maxfillbar;
+            }
         }
     }
     

@@ -215,6 +215,7 @@ public class zombie : MonoBehaviour
     {
         this.isDead = true;
         col.enabled = false;
+        this.AudioManager.PlayZombieDeath();
         animator.SetBool("isDead", this.isDead);
         Instantiate(deathParticle, transform.position, transform.rotation);
 

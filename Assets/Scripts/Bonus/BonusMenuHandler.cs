@@ -9,6 +9,8 @@ using TMPro;
 public class BonusMenuHandler : MonoBehaviour
 {
 
+    private AudioManager AudioManager;
+
     private PlayerStats playerStats;
     
     private List<Bonus> listeBonus;
@@ -26,6 +28,8 @@ public class BonusMenuHandler : MonoBehaviour
     void Start()
     {
         
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
         this.playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
         // On récupère nos 2 game Object Card
@@ -139,7 +143,7 @@ public class BonusMenuHandler : MonoBehaviour
         this.bonus1.apply(this.playerStats);
         this.gameObject.SetActive(false);
         RandomBonus();
-
+        AudioManager.PlayBonusSelect();
     }
 
     public void ApplyBonus2()
@@ -147,6 +151,7 @@ public class BonusMenuHandler : MonoBehaviour
         this.bonus2.apply(this.playerStats);
         this.gameObject.SetActive(false);
         RandomBonus();
+        AudioManager.PlayBonusSelect();
     }
 }
 

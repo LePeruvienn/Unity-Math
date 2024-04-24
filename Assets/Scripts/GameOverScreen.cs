@@ -8,14 +8,20 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
 
+    private AudioManager AudioManager;
+
     public GameObject ScreenGameOver;
 
     public TextMeshProUGUI TextMeshPro;
+
     public void Setup(int score)
     {
-        Debug.Log("DEAD SCREEN");
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        this.AudioManager.PlayGameOver();
+        this.AudioManager.StopBackGroundMusic();
         ScreenGameOver.SetActive(true);
         TextMeshPro.text = "Score : " + score.ToString();
+
     }
 
     public void RestartButton()
