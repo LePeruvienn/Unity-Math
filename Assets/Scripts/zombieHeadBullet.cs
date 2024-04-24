@@ -21,8 +21,10 @@ public class zombieHeadBullet : MonoBehaviour
             if (!other.gameObject.CompareTag("Zombie"))
             {
                 float getZombieCharged = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAimWeapon>().getZombieCharged();
+                this.AudioManager.PlayZombieSpawn();
                 GameObject Zombie = Object.Instantiate(ZombiePrefab, this.gameObject.transform.position, Quaternion.identity);
                 Zombie.GetComponent<zombie>().UpdateScale(getZombieCharged);
+                Debug.Log("getZombieCharged = " + getZombieCharged);
             }
             Destroy(this.gameObject);
         }

@@ -10,8 +10,12 @@ using UnityEngine.UIElements;
 
 public class zombie : MonoBehaviour
 {
-    private AudioManager AudioManager;
-    
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public List<AudioClip> zombieDeathList;
+    public AudioClip damageAudio;
+
+    [Header("Stats")]
     // stats
     public float force;
     public int damage;
@@ -54,7 +58,7 @@ public class zombie : MonoBehaviour
         this.isDead = false;
         this.isPulled = false;
 
-        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        this.audioSource = GetComponent<AudioSource>();
 
         this.gameHandler = GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>();
 
@@ -215,7 +219,7 @@ public class zombie : MonoBehaviour
     {
         this.isDead = true;
         col.enabled = false;
-        this.AudioManager.PlayZombieDeath();
+        PlayDeathSound();
         animator.SetBool("isDead", this.isDead);
         Instantiate(deathParticle, transform.position, transform.rotation);
 
@@ -235,11 +239,28 @@ public class zombie : MonoBehaviour
     {
         while(col.IsTouching(target.GetComponent<Collider2D>()))
         {
-            AudioManager.PlayDamage();
+            PlayDamageSound();
             playerStats.takeDamage(10);
             yield return new WaitForSeconds(1f);
         }
     }
+
+    // SOUNDS
+
+    private void PlayDeathSound()
+    {
+        AudioClip audioClip = zombieDeathList[Random.Range(0, zombieDeathList.Count)];
+        this.audioSource.clip = audioClip;
+        this.audioSource.Play();
+    }
+
+    private void PlayDamageSound()
+    {
+        this.audioSource.clip = this.damageAudio;
+        this.audioSource.Play();
+    }
+
+    //GETTERS
 
     public bool getIsDead()
     {

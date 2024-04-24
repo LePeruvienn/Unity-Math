@@ -8,6 +8,15 @@ public class AudioManager : MonoBehaviour
     public GameObject BackgroundMusicObj;
     private AudioSource BackgroundMusicSource;
 
+    public GameObject PlayerAudioObj;
+    private AudioSource PlayerAudioSource;
+
+    public GameObject WeaponAudioObj;
+    private AudioSource WeaponAudioSource;
+
+    public GameObject ZombieheadAudioObj;
+    private AudioSource ZombieheadAudioSource;
+
 
     [Header("Menu")]
     public List<AudioClip> buttonHoverList;
@@ -18,16 +27,17 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> playerWalkingList;
     public AudioClip bonusTime;
     public AudioClip bonusSelect;
-    public AudioClip zombieHit;
-    public List<AudioClip> zombieDeathList;
-    public AudioClip tireHead;
-    public AudioClip aspireDebut;
-    public AudioClip aspirePendant;
-    public AudioClip aspireFin;
+    public AudioClip zombieSpawn;
 
     void Start()
     {
         this.BackgroundMusicSource = BackgroundMusicObj.GetComponent<AudioSource>();
+
+        this.PlayerAudioSource = PlayerAudioObj.GetComponent<AudioSource>();
+
+        this.WeaponAudioSource = WeaponAudioObj.GetComponent<AudioSource>();
+
+        this.ZombieheadAudioSource = ZombieheadAudioObj.GetComponent<AudioSource>();
     }
 
 
@@ -68,11 +78,6 @@ public class AudioManager : MonoBehaviour
         PlaySound(audioClip);
     }
 
-    public void PlayDamage()
-    {
-        PlaySound(zombieHit);
-    }
-
     public void PlayBonusTime()
     {
         PlaySound(bonusTime);
@@ -87,14 +92,9 @@ public class AudioManager : MonoBehaviour
         PlaySound(gameOver);
     }
 
-    public void PlayTirehead()
+    public void PlayZombieSpawn()
     {
-        PlaySound(tireHead);
-    }
-
-    public void PlayZombieDeath()
-    {
-        AudioClip audioClip = zombieDeathList[Random.Range(0, zombieDeathList.Count)];
-        PlaySound(audioClip);
+        this.ZombieheadAudioSource.clip = zombieSpawn;
+        this.ZombieheadAudioSource.Play();
     }
 }
