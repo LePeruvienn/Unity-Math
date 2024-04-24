@@ -128,7 +128,7 @@ namespace bonus
 
         private int amount;
 
-        public BonusPowerReloadSpeed(int amount) : base("Realod", "Make your vaccum reload faster", "Bonus/battery")
+        public BonusPowerReloadSpeed(int amount) : base("Realod", "Make your vaccum reload faster", "Bonus/batteryFast")
         {
             this.amount = amount;
         }
