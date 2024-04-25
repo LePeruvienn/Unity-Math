@@ -21,6 +21,8 @@ public class zombie : MonoBehaviour
     public int damage;
     public bool isDead;
 
+    private bool isDamaging;
+
     private GameHandler gameHandler;
 
     //Damages rate
@@ -57,6 +59,7 @@ public class zombie : MonoBehaviour
 
         this.isDead = false;
         this.isPulled = false;
+        this.isDamaging = false;
 
         this.audioSource = GetComponent<AudioSource>();
 
@@ -233,11 +236,17 @@ public class zombie : MonoBehaviour
 
     IEnumerator applyDamage()
     {
-        while(col.IsTouching(target.GetComponent<Collider2D>()))
+        if(!isDamaging)
         {
-            PlayDamageSound();
-            playerStats.takeDamage(10);
-            yield return new WaitForSeconds(1f);
+            while (col.IsTouching(target.GetComponent<Collider2D>()))
+            {
+                isDamaging = true;
+                PlayDamageSound();
+                playerStats.takeDamage(10);
+                yield return new WaitForSeconds(1f);
+            }
+
+            isDamaging = false;
         }
     }
 

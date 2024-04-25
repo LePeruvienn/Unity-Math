@@ -16,6 +16,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Setup(int score)
     {
+        Debug.Log("Gameover 2");
         this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         this.AudioManager.PlayGameOver();
         this.AudioManager.StopBackGroundMusic();

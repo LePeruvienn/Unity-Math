@@ -50,6 +50,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
 
+        this.BackgroundMusicSource = BackgroundMusicObj.GetComponent<AudioSource>();
+        
         this.AspiAudioSource = AspiAudioObj.GetComponent<AudioSource>();
 
         this.PlayerAudioSource = PlayerAudioObj.GetComponent<AudioSource>();

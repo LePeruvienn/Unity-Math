@@ -248,6 +248,7 @@ public class PlayerStats : MonoBehaviour
             this.isDead = true;
             this.gameObject.SetActive(false);
             GameOverScreen.Setup(gameHandler.getScore());
+            Debug.Log("Gameover 1");
         }
         else
         {
@@ -403,5 +404,10 @@ public class PlayerStats : MonoBehaviour
     {
         this.canDash = can;
         this.dashImage.SetActive(can);
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
     }
 }
