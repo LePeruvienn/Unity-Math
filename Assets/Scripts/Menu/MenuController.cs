@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour
     public GameObject score;
     public GameObject options;
     public GameObject credit;
+    public GameObject tuto;
 
 
     void Start()

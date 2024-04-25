@@ -961,6 +961,7 @@ MonoBehaviour:
   score: {fileID: 1036897626}
   options: {fileID: 1672787365}
   credit: {fileID: 1267187519}
+  tuto: {fileID: 0}
 --- !u!1 &158946133
 GameObject:
   m_ObjectHideFlags: 0
@@ -6721,14 +6722,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 130558994}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: GoToCredit
-        m_Mode: 1
+        m_MethodName: changeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: tuto
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 506022611}
