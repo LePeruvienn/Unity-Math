@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
+    private AudioManager AudioManager;
+
     public GameObject objectToSpawn;
     public Animator animator;
     public GameObject bonusMenu;
     private bool isOpen = false;
+
+    void Start()
+    {
+        this.AudioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
     private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
        if (collision.gameObject.CompareTag("Player"))
@@ -16,6 +23,7 @@ public class PickUpObject : MonoBehaviour
             if (!isOpen)
             {
                 isOpen = true;
+                this.AudioManager.PlayBonusTime();
                 animator.SetTrigger("ChestOpening");
                 StartCoroutine("waiter_not_that_waiter_just_waiter");
 
