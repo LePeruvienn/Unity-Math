@@ -9,6 +9,7 @@ public class DialogueTrigger : MonoBehaviour
     public bool isInRange;
 
     private Text interacrUI;
+    public GameObject panel;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             isInRange = false;
             interacrUI.enabled = false;
+            panel.SetActive(false);
         }
     }
 

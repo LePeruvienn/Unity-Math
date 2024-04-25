@@ -19,6 +19,8 @@ TagManager:
   - ScreenGameOver
   - Audio
   - AudioManager
+  - intUI
+  - dialogue
   layers:
   - Default
   - TransparentFX
