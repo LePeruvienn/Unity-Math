@@ -4,6 +4,9 @@
 
 > **Zombie Math** est un jeu d’action et de réflexion dans lequel vous devez utiliser votre aspirateur mathématique pour vaincre des zombies, tout en améliorant vos compétences en calcul mental rapide. Inspiré des mécaniques des *roguelikes*, chaque partie est un nouveau défi !
 
+
+## 📄 [Voir la présentation en PDF](https://docs.google.com/presentation/d/1RsWAwSCY65RuLNUxINkFnWqg-J--uR8HcH8Do9J3dRY/edit?usp=sharing)
+
 ---
 
 ## 🎯 Objectifs du projet
