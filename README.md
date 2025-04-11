@@ -34,18 +34,17 @@ Jouer → Survivre → Gagner du score → Perdre → Recommencer pour battre so
 
 ---
 
-## 🎮 Fonctionnalités principales
+## 🧩 Fonctionnalités principales
 
-| 🧩 Fonctionnalité | 📹 GIF associé | 📋 Description |
+| 🎯 Fonctionnalité | 📹 GIF associé | 📋 Description |
 |------------------|----------------|----------------|
-| 👾 **Zombies & Vagues** | ![Zombies](./assets/gif_zombie.gif) | Les zombies deviennent de plus en plus nombreux à chaque manche. |
-| 🧲 **Système d’aspiration** | ![Aspirateur](./assets/gif_aspirateur.gif) | Aspirer un zombie, choisir un mode, et le lancer sur un autre pour effectuer une opération. |
-| ➕ **Calculs dynamiques** | ![Calculs](./assets/gif_calcul.gif) | Chaque interaction est une opération mentale rapide à effectuer. |
-| 🎲 **Choix de bonus** | ![Bonus](./assets/gif_bonus.gif) | À la fin de chaque manche ou dans les coffres, des bonus sont proposés. |
-| 🎮 **Cartes et niveaux** | ![Map](./assets/gif_map.gif) | Différents environnements : menu, tutoriel, jeu principal. |
-| 🎵 **Ambiance sonore** | ![Audio](./assets/gif_audio.gif) | Musiques et FX qui renforcent l’immersion et le flow du joueur. |
-| 📈 **Système de score** | ![Score](./assets/gif_score.gif) | Score basé sur les zombies éliminés et le nombre de manches réussies. |
+| 🏠 **Menu principal** | ![Menu](https://media.giphy.com/media/bAo5i63qdWiezSUtyF/giphy.gif) | Point de départ du joueur avec accès au tutoriel, au jeu principal et aux paramètres. |
+| 🧑‍🏫 **Tutoriel avec PNJ** | ![Tutoriel](https://media.giphy.com/media/W7SCnF8lFg5HLSR4MQ/giphy.gif) | Un personnage non-joueur vous guide pour comprendre les mécaniques de jeu pas à pas. |
+| ➗ **Calculs dynamiques en jeu** | ![Calculs](https://media.giphy.com/media/1TticIADq9V6kPZp5f/giphy.gif) | Effectuez des opérations mentales rapides pour vaincre les zombies et marquer des points. |
+| 🧟‍♂️ **Vagues de zombies évolutives** | ![Vagues](https://media.giphy.com/media/uhLI7OCWpkoPtpzEhC/giphy.gif) | Les manches deviennent de plus en plus difficiles avec davantage d’ennemis et de pression. |
+| 🎁 **Choix de bonus entre les manches** | ![Bonus](https://media.giphy.com/media/mE1EXYv2P48R2z8cqI/giphy.gif) | À la fin de chaque manche ou dans un coffre, choisissez un bonus stratégique pour progresser. |
 
+*... Et bien d'autres surprises à découvrir en jeu !*
 ---
 
 ## 🧰 Technologies et outils utilisés
@@ -81,16 +80,6 @@ Ou téléchargez directement la release ici :
 
 ---
 
-## 📸 Aperçus
-
-Ajoutez ici des GIFs de gameplay tirés de votre jeu :  
-*(Par exemple ci-dessous)*
-
-![Gameplay 1](./assets/gif_gameplay1.gif)  
-![Gameplay 2](./assets/gif_gameplay2.gif)
-
----
-
 ## 🤝 Contribuer
 
 Vous voulez proposer une feature ? Corriger un bug ?  
@@ -101,4 +90,6 @@ Les PR sont les bienvenus ! Créez une *issue* ou une *pull request* pour partic
 ## 🕹️ À vous de jouer !
 
 Zombie Math n’attend que vos cerveaux... pour les faire travailler ! 🧠🔥
+
+![Zombie](https://media.tenor.com/PK6TqRzYhU4AAAAj/zombi-con-bandera.gif)
 
