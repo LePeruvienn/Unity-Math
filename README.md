@@ -2,61 +2,103 @@
 
 <img src="https://github.com/LePeruvienn/Unity-Math/assets/130672436/50445e53-1c8a-456b-91e7-e8c6060fe442" alt="logoMathZombie" width="400">
 
-> **Zombie Math** est un jeu éducatif fun et flippant où tu dois résoudre des problèmes mathématiques pour survivre à des vagues de zombies affamés de cerveaux… ou de mauvaises réponses.
+> **Zombie Math** est un jeu d’action et de réflexion dans lequel vous devez utiliser votre aspirateur mathématique pour vaincre des zombies, tout en améliorant vos compétences en calcul mental rapide. Inspiré des mécaniques des *roguelikes*, chaque partie est un nouveau défi !
 
 ---
 
-## 🎮 Description rapide
+## 🎯 Objectifs du projet
 
-Dans Zombie Math, chaque bonne réponse aux questions de calcul te rapproche de la survie. Mais attention, une erreur, et les zombies se rapprochent… et toi, tu n’as pas de deuxième chance !
+- Créer un jeu respectant le sujet éducatif.
+- Proposer un gameplay amusant et original.
+- Offrir un vrai challenge autour des mathématiques.
+- Permettre aux joueurs de s’améliorer en calcul mental.
 
 ---
 
-## ✨ Fonctionnalités principales
+## 💡 Concept du jeu
+
+- Des zombies poursuivent le joueur dans un donjon.
+- Pour les éliminer, il faut utiliser un **aspirateur** qui permet de lancer des opérations mathématiques.
+- Chaque zombie représente un **nombre**. Il faut atteindre **zéro** en utilisant les bons calculs.
+- L’énergie de l’aspirateur est limitée : il faut donc faire des choix stratégiques.
+- Après chaque manche, le joueur choisit un **bonus** pour améliorer ses chances.
+- Le but : **faire le meilleur score possible avant de mourir**.
+
+---
+
+## 🔁 Boucle de gameplay
+
+```text
+Jouer → Survivre → Gagner du score → Perdre → Recommencer pour battre son record !
+```
+
+---
+
+## 🎮 Fonctionnalités principales
 
 | 🧩 Fonctionnalité | 📹 GIF associé | 📋 Description |
 |------------------|----------------|----------------|
-| 👾 **Zombies dynamiques** | ![Zombies dynamiques](./assets/gif_zombie.gif) | Les zombies apparaissent avec des vitesses et comportements variés selon le niveau. |
-| 🔢 **Questions mathématiques aléatoires** | ![Questions](./assets/gif_questions.gif) | Générées dynamiquement selon la difficulté choisie. |
-| 🎯 **Réponse en temps réel** | ![Réponse](./assets/gif_reponse.gif) | Tu dois taper la bonne réponse avant que le zombie t’atteigne. |
-| 🧱 **Système de niveaux** | ![Niveaux](./assets/gif_niveaux.gif) | Plus tu avances, plus les zombies sont rapides… et les calculs plus durs. |
-| 💥 **Power-ups** | ![Power-ups](./assets/gif_powerup.gif) | Ralentis les zombies ou gagne des points bonus avec des items ramassés en jeu. |
-| 🎵 **Ambiance sonore flippante** | ![Audio](./assets/gif_audio.gif) | Une bande-son immersive pour te mettre dans l’ambiance de la survie. |
-| 🏆 **Tableau des scores** | ![Scoreboard](./assets/gif_scores.gif) | Garde une trace de tes meilleures performances… ou de ta chute. |
+| 👾 **Zombies & Vagues** | ![Zombies](./assets/gif_zombie.gif) | Les zombies deviennent de plus en plus nombreux à chaque manche. |
+| 🧲 **Système d’aspiration** | ![Aspirateur](./assets/gif_aspirateur.gif) | Aspirer un zombie, choisir un mode, et le lancer sur un autre pour effectuer une opération. |
+| ➕ **Calculs dynamiques** | ![Calculs](./assets/gif_calcul.gif) | Chaque interaction est une opération mentale rapide à effectuer. |
+| 🎲 **Choix de bonus** | ![Bonus](./assets/gif_bonus.gif) | À la fin de chaque manche ou dans les coffres, des bonus sont proposés. |
+| 🎮 **Cartes et niveaux** | ![Map](./assets/gif_map.gif) | Différents environnements : menu, tutoriel, jeu principal. |
+| 🎵 **Ambiance sonore** | ![Audio](./assets/gif_audio.gif) | Musiques et FX qui renforcent l’immersion et le flow du joueur. |
+| 📈 **Système de score** | ![Score](./assets/gif_score.gif) | Score basé sur les zombies éliminés et le nombre de manches réussies. |
+
+---
+
+## 🧰 Technologies et outils utilisés
+
+| Type | Outils |
+|------|--------|
+| 🎮 Moteur de jeu | Unity |
+| 🧠 Langage | C# via Visual Studio |
+| 💬 Communication | Discord |
+| 🛠️ Versioning | GitHub |
+| 📊 Gestion de projet | Diagrammes PERT / Gantt, cahier des charges |
+| 🔦 Autres packages Unity | NavMeshPlus (IA), JSON (sauvegarde), effets de lumière |
 
 ---
 
 ## 🛠️ Installation
 
 ```bash
-git clone https://github.com/ton-pseudo/zombie-math.git
-cd zombie-math
-# Instructions spécifiques selon le moteur utilisé (ex : Godot, Unity...)
+git clone https://github.com/LePeruvienn/Unity-Math.git
+cd Unity-Math
+# Télécharger la release ou ouvrir dans Unity
 ```
+
+Ou téléchargez directement la release ici :  
+🔗 https://github.com/LePeruvienn/Unity-Math/releases/tag/Build
 
 ---
 
-## 📸 Aperçu
+## ▶️ Lancement du jeu
 
-Voici quelques GIFs du jeu en action :
+1. Double-cliquez sur `ZombieMath x64` pour accéder au dossier du jeu.
+2. Lancez l’exécutable `ZombieMath.exe`.
 
-![Gameplay](./assets/gif_gameplay1.gif)  
+---
+
+## 📸 Aperçus
+
+Ajoutez ici des GIFs de gameplay tirés de votre jeu :  
+*(Par exemple ci-dessous)*
+
+![Gameplay 1](./assets/gif_gameplay1.gif)  
 ![Gameplay 2](./assets/gif_gameplay2.gif)
 
 ---
 
 ## 🤝 Contribuer
 
-Les contributions sont les bienvenues ! Si tu as des idées de nouvelles features, de niveaux ou des corrections à proposer, n’hésite pas à faire un pull request ou ouvrir une issue.
+Vous voulez proposer une feature ? Corriger un bug ?  
+Les PR sont les bienvenus ! Créez une *issue* ou une *pull request* pour participer au développement.
 
 ---
 
-## 📜 Licence
+## 🕹️ À vous de jouer !
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](./LICENSE) pour plus d’informations.
+Zombie Math n’attend que vos cerveaux... pour les faire travailler ! 🧠🔥
 
----
-
-## 🧠 À propos
-
-Zombie Math a été conçu pour allier **fun**, **frissons** et **révisions de maths**. Que tu sois un élève en quête d’un jeu sérieux ou un prof qui veut faire flipper ses élèves (gentiment), ce jeu est pour toi.
