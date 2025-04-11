@@ -45,6 +45,7 @@ Jouer → Survivre → Gagner du score → Perdre → Recommencer pour battre so
 | 🎁 **Choix de bonus entre les manches** | ![Bonus](https://media.giphy.com/media/mE1EXYv2P48R2z8cqI/giphy.gif) | À la fin de chaque manche ou dans un coffre, choisissez un bonus stratégique pour progresser. |
 
 *... Et bien d'autres surprises à découvrir en jeu !*
+
 ---
 
 ## 🧰 Technologies et outils utilisés
